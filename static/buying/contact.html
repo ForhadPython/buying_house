@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="module bg-dark-60 contact-page-header bg-dark"
+         style="background-image: url('{{ banner.image.url }}');">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <h2 class="module-title font-alt">{{ banner.title }}</h2>
+        <div class="module-subtitle font-serif">{{ banner.description|safe }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="module">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <h4 class="font-alt">Get in touch</h4><br/>
+        {% if message %}
+          <p class="alert alert-info">{{ message }}</p>
+        {% endif %}
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label class="sr-only" for="full_name">Name</label>
+            <input class="form-control" type="text" id="full_name" name="full_name" placeholder="Your Name*" required />
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="email">Email</label>
+            <input class="form-control" type="email" id="email" name="email" placeholder="Your Email*" required />
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" rows="7" id="description" name="description" placeholder="Your Message*" required></textarea>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-block btn-round btn-d" type="submit">Submit</button>
+          </div>
+        </form>
+      </div><br/>
+      <div class="col-sm-6">
+        <h4 class="font-alt">{{ additional_info.title }}</h4><br/>
+        <p>{{ additional_info.description|safe }}</p>
+      </div>
+      <div class="col-sm-6">
+        <h4 class="font-alt">{{ business_hours.title }}</h4><br/>
+        <ul class="list-unstyled">
+          <li>{{ business_hours.description|safe }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

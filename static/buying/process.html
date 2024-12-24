@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Process Banner Section (Dynamic) -->
+<section class="module bg-dark-60 contact-page-header bg-dark" style="background-image: url({{ process_banner.image.url }});">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h2 class="module-title font-alt">{{ process_banner.title }}</h2>
+                <div class="module-subtitle font-serif">{{ process_banner.description|safe }}</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Process Content Section (Dynamic) -->
+<section class="module">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h2 class="module-title font-alt">apparel sourcing ltd.</h2>
+                <div class="module-subtitle font-serif">We will always put your requirements first and work as your dedicated representative.</div>
+            </div>
+        </div>
+        <hr class="divider-w pt-20">
+
+        <!-- Dynamic Process Content Loop -->
+        <div class="row mb-60">
+            {% for content in process_content %}
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="alt-features-item">
+                    <div class="alt-features-icon"><span class="icon-strategy"></span></div>
+                    <h3 class="alt-features-title font-alt">{{ content.title }}</h3>
+                    <p>{{ content.description|safe }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Dynamic Process Data Loop -->
+        <div class="row">
+            {% for data in process_data %}
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="alt-features-item">
+                    <div class="alt-features-icon"><img src="{{ data.image.url }}" alt="{{ data.title }}"></div>
+                    <h3 class="alt-features-title font-alt">{{ data.title }}</h3>
+                    <p>{{ data.description|safe }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

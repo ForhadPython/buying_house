@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Sustainability Banner Section -->
+{% for banner in banners %}
+<section class="module bg-dark-60 contact-page-header bg-dark" data-background="{{ banner.image.url }}">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h2 class="module-title font-alt">{{ banner.title }}</h2>
+                <div class="module-subtitle font-serif">{{ banner.description|safe }}</div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+<br/><br/><br/><br/>
+
+<!-- Sustainability About Section -->
+{% for about in abouts %}
+<section class="module pt-0 pb-0" id="about">
+    <div class="row position-relative m-0">
+        <div class="col-xs-12 col-md-6 side-image" data-background="{{ about.image.url }}"></div>
+        <div class="col-xs-12 col-md-6 col-md-offset-6 side-image-text">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="module-title font-alt align-left">{{ about.title }}</h2>
+                    <div class="module-subtitle font-serif align-left">{{ about.short_desc|safe }}</div>
+                    <p>{{ about.description|safe }}</p>
+                </div>
+            </div>
+        </div>
+        <a class="section-scroll btn btn-border-w btn-round" href="#about">Learn More</a>
+    </div>
+</section>
+{% endfor %}
+<br/><br/><br/><br/>
+
+<!-- Our Partner Certifications Section -->
+<section class="module">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h2 class="module-title font-alt">Our Partner Certifications</h2>
+                <div class="module-subtitle font-serif">The languages only differ in their grammar, their pronunciation and their most common words.</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="owl-carousel text-center" data-items="5" data-pagination="false" data-navigation="false">
+                {% for slider in partner_sliders %}
+                <div class="owl-item">
+                    <div class="col-sm-12">
+                        <div class="ex-product">
+                            <a href="{{ slider.link }}"><img src="{{ slider.image.url }}" alt="{{ slider.title }}" /></a>
+                            <h4 class="shop-item-title font-alt"><a href="{{ slider.link }}">{{ slider.title }}</a></h4>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

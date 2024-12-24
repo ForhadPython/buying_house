@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="module bg-dark-60 contact-page-header bg-dark" style="background-image: url({{ banners.0.image.url }});">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h2 class="module-title font-alt">{{ banners.0.title }}</h2>
+                <div class="module-subtitle font-serif">{{ banners.0.description|safe }}</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="module-small">
+    <div class="container">
+        <form class="row">
+            <div class="col-sm-4 mb-sm-20">
+                <select class="form-control">
+                    <option selected="selected">Default Sorting</option>
+                    <option>Popular</option>
+                    <option>Latest</option>
+                    <option>Average Price</option>
+                    <option>High Price</option>
+                    <option>Low Price</option>
+                </select>
+            </div>
+            <div class="col-sm-2 mb-sm-20">
+                <select class="form-control">
+                    <option value="">All Genders</option>
+                    {% for gender in genders %}
+                    <option value="{{ gender.id }}">{{ gender.gender }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-sm-3 mb-sm-20">
+                <select class="form-control">
+                    <option value="">All Categories</option>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <button class="btn btn-block btn-round btn-g" type="submit">Apply</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<hr class="divider-w">
+<section class="module-small">
+    <div class="container">
+        <div class="row multi-columns-row">
+            {% for product in products %}
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="shop-item">
+                    <div class="shop-item-image">
+                        <img src="{{ product.image.url }}" alt="{{ product.title }}">
+                        <div class="shop-item-detail">
+                            <a class="btn btn-round btn-b"><span class="icon-basket">View Product</span></a>
+                        </div>
+                    </div>
+                    <h4 class="shop-item-title font-alt">
+                        <a href="{{ product.link }}">{{ product.title }}</a>
+                    </h4>
+                    BDT{{ product.price }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+<!--        <div class="row">-->
+<!--            <div class="col-sm-12">-->
+<!--                <div class="pagination font-alt">-->
+<!--                    &lt;!&ndash; Pagination logic can go here &ndash;&gt;-->
+<!--                    <a href="#"><i class="fa fa-angle-left"></i></a>-->
+<!--                    <a class="active" href="#">1</a>-->
+<!--                    <a href="#">2</a>-->
+<!--                    <a href="#">3</a>-->
+<!--                    <a href="#">4</a>-->
+<!--                    <a href="#"><i class="fa fa-angle-right"></i></a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- About Banner Section (Dynamic) -->
+<section class="module bg-dark-60 contact-page-header bg-dark" style="background-image: url('{{ about_banner.image.url }}');">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h2 class="module-title font-alt">{{ about_banner.title }}</h2>
+                <div class="module-subtitle font-serif">{{ about_banner.description|safe }}</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section (Dynamic Loop) -->
+<section class="module pt-0 pb-0" id="about">
+    {% for about_item in about %}
+    <div class="row position-relative m-0">
+        <div class="col-xs-12 col-md-6 side-image" style="background-image: url('{{ about_item.image.url }}');"></div>
+
+        <div class="col-xs-12 col-md-6 col-md-offset-6 side-image-text">
+            <h2 class="module-title font-alt align-left">{{ about_item.title }}</h2>
+            <div class="module-subtitle font-serif align-left">{{ about_item.short_desc|safe }}</div>
+            <p>{{ about_item.description|safe }}</p>
+            <a href="{{ about_item.link }}" class="btn btn-border-w btn-round">Learn More</a>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+<!-- Slider Title Section (Dynamic) -->
+<section class="module">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h2 class="module-title font-alt">{{ slider_title.title }}</h2>
+                <div class="module-subtitle font-serif">{{ slider_title.description|safe }}</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Slider Section (Dynamic) -->
+<section class="module">
+    <div class="container">
+        <div class="row">
+            <div class="owl-carousel text-center" data-items="5" data-pagination="false" data-navigation="false">
+                {% for slider in about_slider %}
+                <div class="owl-item">
+                    <div class="col-sm-12">
+                        <div class="ex-product">
+                            <a href="{{ slider.link }}">
+                                <img src="{{ slider.image.url }}" alt="{{ slider.title }}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

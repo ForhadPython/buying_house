@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Service Banner Section (Dynamic) -->
+<section class="module bg-dark-60 contact-page-header bg-dark" style="background-image: url({{ service_banners.image.url }});">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h2 class="module-title font-alt">{{ service_banners.title }}</h2>
+                <div class="module-subtitle font-serif">{{ service_banners.description|safe }}</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Dynamic Service Data Loop (Our Office Section) -->
+<section class="module pt-0 pb-0" id="about">
+    <div class="container">
+        <div class="row">
+            {% for service in service_data %}
+            <div class="col-xs-12 col-md-6 side-image" data-background="{{ service.image.url }}"></div>
+            <div class="col-xs-12 col-md-6 col-md-offset-6 side-image-text">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="module-title font-alt align-left">{{ service.title }}</h2>
+                        <div class="module-subtitle font-serif align-left">{{ service.short_desc|safe }}</div>
+                        <p>{{ service.description|safe }}</p>
+                        <button style="background-color:black;"><a class="btn btn-border-w btn-round" href="{{ service.link }}">Learn More</a></button>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p>No service data available.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<br/><br/>
+<hr class="divider-d">
+
+<!-- Work Together Section (Dynamic) -->
+{% if work_together %}
+<section class="module pt-0 pb-0" id="work-together">
+    <div class="row position-center">
+        <h1 style="text-align:center;">{{ work_together.title }}</h1>
+        <p style="text-align:center;">{{ work_together.description|safe }}</p>
+        <div style="text-align:center;">
+            <button style="background-color:black;text-align:center">
+                <a class="btn btn-border-w btn-round" href="{{ work_together.link }}">Contact Us</a>
+            </button>
+        </div>
+    </div>
+</section>
+{% else %}
+<section class="module pt-0 pb-0" id="work-together">
+    <div class="row position-center">
+        <h1 style="text-align:center;">Let's Work Together!</h1>
+        <p style="text-align:center;">No content available for "Work Together" section.</p>
+        <div style="text-align:center;">
+            <button style="background-color:black;text-align:center">
+                <a class="btn btn-border-w btn-round" href="#">Contact Us</a>
+            </button>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<br/><br/>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Dynamic Banner Section -->
+<section class="module bg-dark-60 contact-page-header bg-dark"
+         style="background-image: url('{{ banner.image.url }}');">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <h2 class="module-title font-alt">{{ banner.title }}</h2>
+        <div class="module-subtitle font-serif">{{ banner.description|safe }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Dynamic Global Network Section -->
+<section class="module" id="services">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <h2 class="module-title font-alt">{{ global_network.title }}</h2>
+        <div class="module-subtitle font-serif">{{ global_network.description|safe }}</div>
+      </div>
+    </div>
+    <div class="row multi-columns-row">
+      {% for item in global_network_data %}
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="features-item">
+          <div class="features-icon">
+            <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width: 60px; height: 60px;">
+          </div>
+          <h3 class="features-title font-alt">{{ item.title }}</h3>
+          <p>{{ item.description|safe }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

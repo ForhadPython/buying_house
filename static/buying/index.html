@@ -1,0 +1,455 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- @@@ Home Banner Section @@@ -->
+<section class="home-section home-full-height bg-dark-30" id="home" data-background="{{ home_banner.link }}">
+    <div class="video-player" data-property="{
+        videoURL:'{{ home_banner.video_url }}',
+        containment:'.home-section',
+        startAt:{{ home_banner.start_at }},
+        mute:{{ home_banner.mute|yesno:"true,false" }},
+        autoPlay:{{ home_banner.auto_play|yesno:"true,false" }},
+        loop:{{ home_banner.loop|yesno:"true,false" }},
+        opacity:{{ home_banner.opacity }},
+        showControls:{{ home_banner.show_controls|yesno:"true,false" }},
+        showYTLogo:{{ home_banner.show_yt_logo|yesno:"true,false" }},
+        vol:{{ home_banner.volume }}
+    }"></div>
+
+    <div class="video-controls-box">
+        <div class="container">
+            <div class="video-controls">
+                <a class="fa fa-volume-up" id="video-volume" href="#">&nbsp;</a>
+                <a class="fa fa-pause" id="video-play" href="#">&nbsp;</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="titan-caption">
+        <div class="caption-content">
+            <div class="font-alt mb-30 titan-title-size-1">{{ home_banner.short_title }}</div>
+            <div class="font-alt mb-40 titan-title-size-4">{{ home_banner.title }}</div>
+            <a class="section-scroll btn btn-border-w btn-round" href="#about">Learn More</a>
+        </div>
+    </div>
+</section>
+<br/><br/>
+<!-- @@@ End Home Banner Section @@@ -->
+
+<!-- @@@ Start About @@@ -->
+<section class="module pt-0 pb-0" id="about">
+    <div class="row position-relative m-0">
+      <div class="col-xs-12 col-md-6 side-image" style="background-image: url('{{ home_about.image.url }}');"></div>
+      <div class="col-xs-12 col-md-6 col-md-offset-6 side-image-text">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 class="module-title font-alt align-left">{{ home_about.title }}</h2>
+            <div class="module-subtitle font-serif align-left">{{ home_about.short_desc|safe }}</div>
+            <p>{{ home_about.description|safe }}</p>
+            <a href="{{ home_about.link }}" class="btn" style="display: inline-block; padding: 12px 24px; font-size: 16px; font-weight: bold; text-align: center; text-decoration: none; border-radius: 50px; background-color: black; color: white; border: 2px solid black; transition: background-color 0.3s, color 0.3s;">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+<!-- @@@ End About @@@ -->
+
+<!-- @@@ Start Our Services @@@ -->
+<section class="module" id="our_services">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <h2 class="module-title font-alt">Our Services</h2>
+        </div>
+      </div>
+      <hr class="divider-w">
+      <div class="row multi-columns-row">
+        {% for service in services %}
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="features-item">
+              <div class="features-icon">
+                <!-- Displaying the image for each service -->
+                <img src="{{ service.image.url }}" alt="{{ service.title }}" class="img-fluid">
+              </div>
+              <h3 class="features-title font-alt">{{ service.title }}</h3>
+              <p>{{ service.description }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+</section>
+<!-- @@@ End Our Services @@@ -->
+
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+      <h2 class="module-title font-alt">Our Products</h2>
+      <div class="module-subtitle font-serif">We engage in the production and export of a diverse range of ready-made garments,
+        including knitwear, woven garments, sweaters, denim apparel, and outerwear, all originating
+        from Bangladesh..</div>
+  </div>
+</div>
+
+<section class="module-small">
+  <hr class="divider-w">
+  <div class="container-fluid">
+    <div class="row multi-columns-row">
+      {% for product in products %}
+        <div class="col-sm-6 col-md-3 col-lg-3">
+          <div class="shop-item">
+            <div class="shop-item-image">
+              <img src="{{ product.image.url }}" alt="{{ product.name }}"/>
+              <div class="shop-item-detail">
+                <a href="{{ product.link }}" class="btn btn-round btn-b">
+                  <span class="icon-basket">View Details</span>
+                </a>
+              </div>
+            </div>
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p><strong>Price: ${{ product.price }}</strong></p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="module" id="alt-features">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <h2 class="module-title font-alt" style="padding: 0px">Competitive Advantage</h2>
+        <div class="module-subtitle font-serif">FEATURES AND SKILLS.</div>
+      </div>
+      <hr class="divider-w">
+    </div>
+
+    <div class="row">
+      <!-- Competitive Advantage Image (First Image) -->
+      <div class="col-md-6 col-lg-6 hidden-xs hidden-sm">
+        <div class="alt-services-image align-center">
+          <!-- Loop through competitive images and display the first image -->
+          {% if competitive_images %}
+            <img src="{{ competitive_images.0.image.url }}" alt="Feature Image">
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Competitive Advantage Info (Icon, Title, and Description) -->
+      <div class="col-sm-6 col-md-3 col-lg-3">
+        {% for info in competitive_info %}
+          <div class="alt-features-item">
+            <div class="alt-features-icon">
+              <!-- Check if the icon is an image and render it accordingly -->
+              {% if info.icon %}
+                <img src="{{ info.icon.url }}" alt="{{ info.title }}">
+              {% else %}
+                <span class="icon-strategy"></span>
+              {% endif %}
+            </div>
+            <h3 class="alt-features-title font-alt">{{ info.title }}</h3>
+            <p>{{ info.description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider-w">
+<section class="module bg-dark-60 pt-0 pb-0 parallax-bg testimonial" data-background="assets/images/testimonial_bg.jpg">
+        <div class="testimonials-slider pt-140 pb-140">
+          <ul class="slides">
+            <li>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="module-icon"><span class="icon-quote"></span></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-8 col-sm-offset-2">
+                    <blockquote class="testimonial-text font-alt">I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.</blockquote>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4 col-sm-offset-4">
+                    <div class="testimonial-author">
+                      <div class="testimonial-caption font-alt">
+                        <div class="testimonial-title">Jack Woods</div>
+                        <div class="testimonial-descr">SomeCompany INC, CEO</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="module-icon"><span class="icon-quote"></span></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-8 col-sm-offset-2">
+                    <blockquote class="testimonial-text font-alt">I should be incapable of drawing a single stroke at the present moment; and yet I feel that I never was a greater artist than now.</blockquote>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4 col-sm-offset-4">
+                    <div class="testimonial-author">
+                      <div class="testimonial-caption font-alt">
+                        <div class="testimonial-title">Jim Stone</div>
+                        <div class="testimonial-descr">SomeCompany INC, CEO</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="module-icon"><span class="icon-quote"></span></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-8 col-sm-offset-2">
+                    <blockquote class="testimonial-text font-alt">I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.</blockquote>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4 col-sm-offset-4">
+                    <div class="testimonial-author">
+                      <div class="testimonial-caption font-alt">
+                        <div class="testimonial-title">Adele Snow</div>
+                        <div class="testimonial-descr">SomeCompany INC, CEO</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!--  @@@ FUNN BANNAR SLIDER @@@@  END -->
+
+<section class="module" id="services">
+    <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h2 class="module-title font-alt">How We Work</h2>
+        <div class="module-subtitle font-serif">We prioritize your requirements, functioning as your committed representative. Our approach involves assessing your inquiries and consistently identifying significant cost savings. Throughout the entire process, from design and development to shipment, we ensure a thorough understanding of your requirements and ultimate objectives, striving to meet them effectively...</div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row multi-columns-row">
+      {% for item in how_we_work_items %}
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="features-item">
+          <!-- Display image if it exists -->
+          {% if item.image %}
+          <div class="features-icon">
+            <img src="{{ item.image.url }}" alt="{{ item.title }}">
+          </div>
+          {% else %}
+          <div class="features-icon"><span class="icon-lightbulb"></span></div>
+          {% endif %}
+
+          <h3 class="features-title font-alt">{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div style="text-align:center;">
+       <button style="background-color:black;text-align:center"><a class="btn btn-border-w btn-round" href="global-network.html">View Details</a></button>
+</div>
+</section>
+
+<section class="module" id="Our Services" style="margin-top: -30px;">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <h2 class="module-title font-alt">Why choose us</h2>
+        </div>
+      </div>
+      <div class="row multi-columns-row">
+        {% for item in why_choose_us %}
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="features-item">
+              <div class="features-icon">
+                {% if item.image %}
+                  <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width: 50px; height: 50px;">
+                {% else %}
+                  <span class="icon-default"></span> <!-- Replace with a default icon if no image -->
+                {% endif %}
+              </div>
+              <h3 class="features-title font-alt">{{ item.title }}</h3>
+              <p>{{ item.description }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+</section>
+
+<!--<section class="module" id="team" style="margin-top: -35px;">-->
+<!--  <div class="container">-->
+<!--    <div class="row">-->
+<!--      <div class="col-sm-6 col-sm-offset-3">-->
+<!--        <h2 class="module-title font-alt">Meet Our Team</h2>-->
+<!--        <div class="module-subtitle font-serif">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--      <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3" onclick="wow fadeInUp">-->
+<!--        <div class="team-item">-->
+<!--          <div class="team-image"><img src="assets/images/team-1.jpg" alt="Member Photo"/>-->
+<!--            <div class="team-detail">-->
+<!--              <h5 class="font-alt">Hi all</h5>-->
+<!--              <p class="font-serif">Lorem ipsum dolor sit amet, consectetur adipiscing elit lacus, a&amp;nbsp;iaculis diam.</p>-->
+<!--              <div class="team-social"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-dribbble"></i></a><a href="#"><i class="fa fa-skype"></i></a></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="team-descr font-alt">-->
+<!--            <div class="team-name">Jim Stone</div>-->
+<!--            <div class="team-role">Art Director</div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3" onclick="wow fadeInUp">-->
+<!--        <div class="team-item">-->
+<!--          <div class="team-image"><img src="assets/images/team-2.jpg" alt="Member Photo"/>-->
+<!--            <div class="team-detail">-->
+<!--              <h5 class="font-alt">Good day</h5>-->
+<!--              <p class="font-serif">Lorem ipsum dolor sit amet, consectetur adipiscing elit lacus, a&amp;nbsp;iaculis diam.</p>-->
+<!--              <div class="team-social"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-dribbble"></i></a><a href="#"><i class="fa fa-skype"></i></a></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="team-descr font-alt">-->
+<!--            <div class="team-name">Andy River</div>-->
+<!--            <div class="team-role">Creative director</div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3" onclick="wow fadeInUp">-->
+<!--        <div class="team-item">-->
+<!--          <div class="team-image"><img src="assets/images/team-3.jpg" alt="Member Photo"/>-->
+<!--            <div class="team-detail">-->
+<!--              <h5 class="font-alt">Hello</h5>-->
+<!--              <p class="font-serif">Lorem ipsum dolor sit amet, consectetur adipiscing elit lacus, a&amp;nbsp;iaculis diam.</p>-->
+<!--              <div class="team-social"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-dribbble"></i></a><a href="#"><i class="fa fa-skype"></i></a></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="team-descr font-alt">-->
+<!--            <div class="team-name">Adele Snow</div>-->
+<!--            <div class="team-role">Account manager</div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3" onclick="wow fadeInUp">-->
+<!--        <div class="team-item">-->
+<!--          <div class="team-image"><img src="assets/images/team-4.jpg" alt="Member Photo"/>-->
+<!--            <div class="team-detail">-->
+<!--              <h5 class="font-alt">Yes, it's me</h5>-->
+<!--              <p class="font-serif">Lorem ipsum dolor sit amet, consectetur adipiscing elit lacus, a&amp;nbsp;iaculis diam.</p>-->
+<!--              <div class="team-social"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-dribbble"></i></a><a href="#"><i class="fa fa-skype"></i></a></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="team-descr font-alt">-->
+<!--            <div class="team-name">Dylan Woods</div>-->
+<!--            <div class="team-role">Developer</div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+<section class="module" id="news" style="margin-top: -35px;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <h2 class="module-title font-alt">Latest blog posts</h2>
+        <div class="module-subtitle font-serif">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</div>
+      </div>
+    </div>
+    <div class="row multi-columns-row post-columns">
+      {% for post in posts %}
+        <div class="col-sm-3 col-md-3 col-lg-3">
+          <div class="post mb-20">
+            <div class="post-thumbnail">
+              <a href="{{ post.link }}"><img src="{{ post.image.url }}" alt="{{ post.title }} Thumbnail"/></a>
+            </div>
+            <div class="post-header font-alt">
+              <h2 class="post-title"><a href="{{ post.link }}">{{ post.title }}</a></h2>
+              <div class="post-meta">
+                By&nbsp;<a href="#">Admin</a>&nbsp;| {{ post.created_at|date:"j F" }} | {{ post.comments_count }} Comments
+              </div>
+            </div>
+            <div class="post-entry">
+              <p>{{ post.description|truncatewords:20 }}</p>
+            </div>
+            <div class="post-more">
+              <a class="more-link" href="{{ post.link }}">Read more</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+</div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <h2 class="module-title font-alt">Global Collaboration</h2>
+      </div>
+    </div>
+      <div style="margin-bottom: 20px;">
+      </div>
+      <div style="display: flex; justify-content: center; gap: 20px; margin: 20px 0;">
+        {% for collaboration in collaborations %}
+          <div style="text-align: center;">
+            <img src="{{ collaboration.flag_image.url }}" alt="{{ collaboration.name }}" style="width: 130px; height: auto;">
+            <p style="margin: 5px 0;">{{ collaboration.name }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    <div class="container-fluid">
+      <div class="row multi-columns-row post-columns">
+        {% for office in offices %}
+          <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="post mb-20">
+              <div class="post-thumbnail">
+                <a href="{{ office.link }}">
+                  <img src="{{ office.image.url }}" alt="Office Image" />
+                </a>
+              </div>
+              <div class="post-header font-alt"></div>
+            </div>
+          </div>
+          {% if forloop.counter|divisibleby:4 and not forloop.last %}
+            </div><div class="row multi-columns-row post-columns">
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div style="text-align:center;">
+        <button style="background-color:black;text-align:center">
+          <a class="btn btn-border-w btn-round" href="global-network.html">View Details</a>
+        </button>
+      </div>
+    </div>
+  </div>
+</section><br/><br/>
+
+
+{% endblock %}
