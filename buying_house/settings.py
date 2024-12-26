@@ -79,24 +79,35 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'buying_house.wsgi.application'
 
-# CKEditor settings
 CKEDITOR_UPLOAD_PATH = "uploads/"
-CKEDITOR_5_CONFIGS = {
+CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': [
-            'heading', '|', 'bold', 'italic', 'link', 'bulletedList',
-            'numberedList', 'blockQuote', 'undo', 'redo',
+        'toolbar': 'full',
+        'height': "100%",
+        'width': "100%",
+        'contentsCss': [
+            '/static/buying/css/ckeditor_custom.css'  # Ensure this path matches your CSS file's location
         ],
-        'height': 300,
-        'width': '100%',
     },
 }
 
+
 # Database
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'hellotockan',
+        'USER': 'hellotockan_website',
+        'PASSWORD': 'hellotockan@321##**',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

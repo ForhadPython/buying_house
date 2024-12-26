@@ -1,0 +1,12 @@
+/* Custom styles for CKEditor content */
+body {
+    line-height: 1.2 !important; /* Adjust the line spacing */
+    font-family: Arial, sans-serif !important; /* Set a consistent font */
+    font-size: 14px !important; /* Adjust font size */
+    margin: 5 !important;
+    padding: 5 !important;
+}
+
+p {
+    margin: 5 !important; /* Remove extra spacing around paragraphs */
+}

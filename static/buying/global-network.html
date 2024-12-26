@@ -6,7 +6,7 @@
 <section class="module bg-dark-60 contact-page-header bg-dark"
          style="background-image: url('{{ banner.image.url }}');">
   <div class="container">
-    <div class="row">
+    <div class="row" style="margin-top:5%">
       <div class="col-sm-6 col-sm-offset-3">
         <h2 class="module-title font-alt">{{ banner.title }}</h2>
         <div class="module-subtitle font-serif">{{ banner.description|safe }}</div>
@@ -15,8 +15,7 @@
   </div>
 </section>
 
-<!-- Dynamic Global Network Section -->
-<section class="module" id="services">
+<section class="module-medium">
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
@@ -27,12 +26,15 @@
     <div class="row multi-columns-row">
       {% for item in global_network_data %}
       <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="features-item">
-          <div class="features-icon">
-            <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width: 60px; height: 60px;">
-          </div>
-          <h3 class="features-title font-alt">{{ item.title }}</h3>
+        <div class="content-box">
+          <div class="content-box-image"><img src="{{ item.image.url }}" alt=""/></div>
+          <h3 class="content-box-title font-serif">{{ item.title }}</h3>
           <p>{{ item.description|safe }}</p>
+        </div>
+        <div style="text-align:center;">
+          <button style="background-color:black;text-align:center">
+            <a class="btn btn-border-w btn-round" href="/contact">Contact --></a>
+          </button>
         </div>
       </div>
       {% endfor %}
