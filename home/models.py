@@ -5,20 +5,17 @@ from django.utils.timezone import now
 # Home Section
 class HomeBanner(models.Model):
     video_url = models.URLField()
-    start_at = models.IntegerField(default=18)
-    mute = models.BooleanField(default=False)
-    auto_play = models.BooleanField(default=True)
-    loop = models.BooleanField(default=True)
+    start_at = models.IntegerField(default=18, null=True, blank=True)
+    mute = models.BooleanField(default=False, null=True, blank=True)
+    auto_play = models.BooleanField(default=True, null=True, blank=True)
+    loop = models.BooleanField(default=True, null=True, blank=True)
     opacity = models.IntegerField(default=1)
-    show_controls = models.BooleanField(default=False)
-    show_yt_logo = models.BooleanField(default=False)
-    volume = models.IntegerField(default=25)
-    short_title = models.CharField(max_length=100)
-    title = models.CharField(max_length=60)
-    link = models.URLField(max_length=200)  # Ensure it's a URL field for proper validation
-
-    def __str__(self):
-        return self.title
+    show_controls = models.BooleanField(default=False, null=True, blank=True)
+    show_yt_logo = models.BooleanField(default=False, null=True, blank=True)
+    volume = models.IntegerField(default=25, null=True, blank=True)
+    short_title = models.CharField(max_length=100, null=True, blank=True)
+    title = models.CharField(max_length=60, null=True, blank=True)
+    link = models.URLField(max_length=200, null=True, blank=True)  # Ensure it's a URL field for proper validation
 
 class HomeAbout(models.Model):
     image = models.ImageField(upload_to='about_images/', null=True)
