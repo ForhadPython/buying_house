@@ -3,47 +3,69 @@
 {% block content %}
 
 <!-- About Banner Section (Dynamic) -->
-<section class="module bg-dark-60 contact-page-header bg-dark" style="background-image: url('{{ about_banner.image.url }}');">
+{% if about_banner %}
+<section class="module bg-dark-60 contact-page-header bg-dark"
+         style="background-image: url('{{ about_banner.image.url }}');
+         background-size: cover;
+         background-position: center;
+         width: 100%;
+         height: auto;
+         min-height: 300px;">
     <div class="container">
-        <div class="row" style="margin-top:5%">
-            <div class="col-sm-6 col-sm-offset-3">
+        <div class="row align-items-center" style="height: 100%;">
+            <div class="col-sm-6 col-sm-offset-3 text-center">
                 <h2 class="module-title font-alt">{{ about_banner.title }}</h2>
                 <div class="module-subtitle font-serif">{{ about_banner.description|safe }}</div>
             </div>
         </div>
     </div>
 </section>
+{% else %}
+<p class="text-center">No banner available.</p>
+{% endif %}
+<br/><br/><br/>
 
-<!-- About Section (Dynamic Loop) -->
+{% for about_item in about %}
 <section class="module pt-0 pb-0" id="about">
-    {% for about_item in about %}
-    <div class="row position-relative m-0">
-        <div class="col-xs-12 col-md-6 side-image" style="background-image: url('{{ about_item.image.url }}');"></div>
-
+    <div class="container">
+        <div class="row position-relative m-0">
+        {% if about_item.image %}
+        <div class="col-xs-12 col-md-6 side-image" data-background="{{ about_item.image.url }}" style="height:80%;"></div>
+        {% else %}
+        <div class="col-xs-12 col-md-6 side-image"></div>
+        {% endif %}
         <div class="col-xs-12 col-md-6 col-md-offset-6 side-image-text">
-            <h2 class="module-title font-alt align-left">{{ about_item.title }}</h2>
-            <div class="module-subtitle font-serif align-left">{{ about_item.short_desc|safe }}</div>
-            <p>{{ about_item.description|safe }}</p>
-            <a href="{{ about_item.link }}" class="btn btn-border-w btn-round">Learn More</a>
+            <div class="col-sm-12" style="margin-top:-60px;">
+                <h2 class="module-title font-alt align-left">{{ about_item.title }}</h2>
+                <p>{{ about_item.description|safe }}</p>
+                <a href="{{ about_item.link }}" class="btn btn-primary btn-round mt-3">Learn More</a>
+            </div>
         </div>
     </div>
-    {% endfor %}
+    </div>
 </section>
+{% endfor %}
+<br/><br/>
 
 <!-- Slider Title Section (Dynamic) -->
-<section class="module">
+{% if slider_title %}
+<section class="module pt-5">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
+        <div class="row text-center">
+            <div class="col-sm-12">
                 <h2 class="module-title font-alt">{{ slider_title.title }}</h2>
                 <div class="module-subtitle font-serif">{{ slider_title.description|safe }}</div>
             </div>
         </div>
     </div>
 </section>
+{% else %}
+<p class="text-center">No slider title available.</p>
+{% endif %}
 
 <!-- About Slider Section (Dynamic) -->
-<section class="module">
+{% if about_slider %}
+<section class="module py-5">
     <div class="container">
         <div class="row">
             <div class="owl-carousel text-center" data-items="5" data-pagination="false" data-navigation="false">
@@ -52,8 +74,10 @@
                     <div class="col-sm-12">
                         <div class="ex-product">
                             <a href="{{ slider.link }}">
-                                <img src="{{ slider.image.url }}" alt="{{ slider.title }}">
+                                <img src="{{ slider.image.url }}" alt="{{ slider.title }}" class="img-fluid rounded">
+                                <h3 class="mt-2">{{ slider.title }}</h3>
                             </a>
+                            <p>{{ slider.description|safe }}</p>
                         </div>
                     </div>
                 </div>
@@ -62,5 +86,8 @@
         </div>
     </div>
 </section>
+{% else %}
+<p class="text-center">No slider content available.</p>
+{% endif %}
 
 {% endblock %}

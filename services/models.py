@@ -10,6 +10,7 @@ class ServiceBanner(models.Model):
     def __str__(self):
         return self.title
 
+
 class ServiceData(models.Model):
     image = models.ImageField(upload_to='Carousel', null=True)
     title = models.CharField(max_length=150)
@@ -19,6 +20,7 @@ class ServiceData(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class WorkTogether(models.Model):
     title = models.CharField(max_length=150)

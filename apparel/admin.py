@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ApparelsBanner, ApparelsCategory, ApparelsGender, ApparelsType, ApparelsProduct
+from .models import ApparelsBanner, ApparelsCategory, ApparelsGender, ApparelsProduct
 
 
 @admin.register(ApparelsBanner)
@@ -20,15 +20,9 @@ class ApparelsGenderAdmin(admin.ModelAdmin):
     search_fields = ('gender',)  # Enables a search box for the gender
 
 
-@admin.register(ApparelsType)
-class ApparelsTypeAdmin(admin.ModelAdmin):
-    list_display = ('type',)  # Displays type in the list view
-    search_fields = ('type',)  # Enables a search box for the type
-
-
 @admin.register(ApparelsProduct)
 class ApparelsProductAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'gender', 'type', 'image', 'link')  # Displays product details in the list view
-    search_fields = ('title', 'category__category', 'gender__gender', 'type__type')  # Enables search for related fields
-    list_filter = ('category', 'gender', 'type')  # Adds filters for category, gender, and type
-    autocomplete_fields = ('category', 'gender', 'type')  # Enables autocomplete for ForeignKey fields
+    list_display = ('title', 'category', 'gender', 'image', 'link')  # Displays product details in the list view
+    search_fields = ('title', 'category__category', 'gender__gender')  # Enables search for related fields
+    list_filter = ('category', 'gender')  # Adds filters for category, gender, and type
+    autocomplete_fields = ('category', 'gender')  # Enables autocomplete for ForeignKey fields

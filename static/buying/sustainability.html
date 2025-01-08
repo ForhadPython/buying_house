@@ -2,12 +2,20 @@
 {% load static %}
 {% block content %}
 
-<!-- Sustainability Banner Section -->
+ Sustainability Banner Section
 {% if sustain_banner %}
-<section class="module bg-dark-60 contact-page-header bg-dark" data-background="{{ sustain_banner.banner_image.url }}">
+<section
+    class="module bg-dark-60 contact-page-header bg-dark"
+    style="
+        background-image: url('{{ sustain_banner.banner_image.url }}');
+          background-size: cover;
+          background-position: center;
+          width: 100%;
+          height: auto;
+          min-height: 300px; /* Adjust this based on your design requirements */">
     <div class="container">
-        <div class="row" style="margin-top:5%">
-            <div class="col-sm-6 col-sm-offset-3">
+        <div class="row" style="margin-top: 5%;">
+            <div class="col-sm-6 col-sm-offset-3 text-center">
                 <h2 class="module-title font-alt">{{ sustain_banner.banner_title }}</h2>
                 <div class="module-subtitle font-serif">{{ sustain_banner.banner_description|safe }}</div>
             </div>
@@ -19,9 +27,7 @@
 {% endif %}
 
 <br/><br/>
-
 <!-- Sustainability About Section-->
-
 {% for sustain_data in sustain_data %}
 <section class="module pt-0 pb-0" id="about">
     <div class="row position-relative m-0">

@@ -6,8 +6,8 @@ def accessories_page(request):
     # Fetch all data from AccessoriesBanner and AccessoriesData
     banners = AccessoriesBanner.objects.all()
     accessories = AccessoriesData.objects.all()
-    context ={
+    context = {
         'banners': banners,
         'accessories': accessories,
     }
-    return render(request, 'accessories.html',context)
+    return render(request, 'accessories.html', context)

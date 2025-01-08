@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from .models import AboutBanner, About, SliderTitle, AboutSlider
 
+
 def about_page(request):
     about_banner = AboutBanner.objects.first()  # Get the first About Banner
     about = About.objects.all()  # Get all About sections

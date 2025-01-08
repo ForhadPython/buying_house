@@ -4,7 +4,12 @@
 
 <!-- Dynamic Banner Section -->
 <section class="module bg-dark-60 contact-page-header bg-dark"
-         style="background-image: url('{{ banner.image.url }}');">
+         style="background-image: url('{{ banner.image.url }}');
+          background-size: cover;
+          background-position: center;
+          width: 100%;
+          height: auto;
+          min-height: 300px; /* Adjust this based on your design requirements */">
   <div class="container">
     <div class="row" style="margin-top:5%">
       <div class="col-sm-6 col-sm-offset-3">

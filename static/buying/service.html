@@ -3,7 +3,13 @@
 {% block content %}
 
 <!-- Service Banner Section (Dynamic) -->
-<section class="module bg-dark-60 contact-page-header bg-dark" style="background-image: url({{ service_banners.image.url }});">
+<section class="module bg-dark-60 contact-page-header bg-dark" style="background-image: url({{ service_banners.image.url }});
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: auto;
+        min-height: 300px; /* Adjust this based on your design requirements */
+    ">
     <div class="container">
         <div class="row" style="margin-top:5%">
             <div class="col-sm-6 col-sm-offset-3">
@@ -13,6 +19,7 @@
         </div>
     </div>
 </section>
+<br><br/><br/>
 
 <!-- Dynamic Service Data Loop (Our Office Section) -->
 <section class="module pt-0 pb-0" id="about">
@@ -43,7 +50,8 @@
 <!-- Work Together Section (Dynamic) -->
 {% if work_together %}
 <section class="module pt-0 pb-0" id="work-together">
-    <div class="row position-center">
+    <div class="container">
+      <div class="row position-center">
         <h1 style="text-align:center;">{{ work_together.title }}</h1>
         <p style="text-align:center;">{{ work_together.description|safe }}</p>
         <div style="text-align:center;">
@@ -51,6 +59,7 @@
                 <a class="btn btn-border-w btn-round" href="{{ work_together.link }}">Contact Us</a>
             </button>
         </div>
+    </div>
     </div>
 </section>
 {% else %}

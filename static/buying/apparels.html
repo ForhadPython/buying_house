@@ -2,30 +2,25 @@
 {% load static %}
 {% block content %}
 
-<section class="module bg-dark-60 contact-page-header bg-dark" style="background-image: url({{ banners.0.image.url }});">
-    <div class="container">
-        <div class="row" style="margin-top:5%">
-            <div class="col-sm-6 col-sm-offset-3">
-                <h2 class="module-title font-alt">{{ banners.0.title }}</h2>
-                <div class="module-subtitle font-serif">{{ banners.0.description|safe }}</div>
+{% if banner %}
+    <section class="module bg-dark-60 contact-page-header bg-dark"
+        style="background-image: url({{ banner.0.image.url }}); background-size: cover; background-position: center; width: 100%; height: auto; min-height: 300px;">
+        <div class="container">
+            <div class="row" style="margin-top:5%">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <h2 class="module-title font-alt">{{ banner.0.title }}</h2>
+                    <div class="module-subtitle font-serif">{{ banner.0.description|safe }}</div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+{% else %}
+    <p>No banners available.</p>
+{% endif %}
 
 <section class="module-small">
     <div class="container">
         <form class="row">
-            <div class="col-sm-4 mb-sm-20">
-                <select class="form-control">
-                    <option selected="selected">Default Sorting</option>
-                    <option>Popular</option>
-                    <option>Latest</option>
-                    <option>Average Price</option>
-                    <option>High Price</option>
-                    <option>Low Price</option>
-                </select>
-            </div>
             <div class="col-sm-2 mb-sm-20">
                 <select class="form-control">
                     <option value="">All Genders</option>

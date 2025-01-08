@@ -2,17 +2,30 @@
 {% load static %}
 {% block content %}
 
-<section class="module bg-dark-60 contact-page-header bg-dark"
-         style="background-image: url('{{ banner.image.url }}');">
-  <div class="container">
-    <div class="row" style="margin-top:5%">
-      <div class="col-sm-6 col-sm-offset-3">
-        <h2 class="module-title font-alt">{{ banner.title }}</h2>
-        <div class="module-subtitle font-serif">{{ banner.description|safe }}</div>
-      </div>
+{% if banner %}
+<section
+    class="module bg-dark-60 contact-page-header bg-dark"
+    style="
+        background-image: url('{{ banner.image.url }}');
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: auto;
+        min-height: 300px; /* Adjust this based on your design requirements */
+    ">
+    <div class="container">
+        <div class="row" style="margin-top: 5%;">
+            <div class="col-sm-6 col-sm-offset-3 text-center">
+                <h2 class="module-title font-alt">{{ banner.title }}</h2>
+                <div class="module-subtitle font-serif">{{ banner.description|safe }}</div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
+{% else %}
+<p>No banner available.</p>
+{% endif %}
+
 
 <section class="module">
   <div class="container">

@@ -3,54 +3,66 @@
 {% block content %}
 
 <!-- Process Banner Section (Dynamic) -->
-<section class="module bg-dark-60 contact-page-header bg-dark" style="background-image: url({{ process_banner.image.url }});">
+{% if process_banner %}
+<section class="module bg-dark-60 contact-page-header bg-dark"
+         style="background-image: url({{ process_banner.image.url }});
+         background-size: cover;
+         background-position: center;
+         width: 100%;
+         height: auto;
+         min-height: 300px;">
     <div class="container">
         <div class="row" style="margin-top:5%">
-            <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-6 col-sm-offset-3 text-center">
                 <h2 class="module-title font-alt">{{ process_banner.title }}</h2>
                 <div class="module-subtitle font-serif">{{ process_banner.description|safe }}</div>
             </div>
         </div>
     </div>
 </section>
+{% else %}
+<p class="text-center">No banner available.</p>
+{% endif %}
 
 <!-- Process Content Section (Dynamic) -->
+{% if process_content %}
 <section class="module">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-                <h2 class="module-title font-alt">apparel sourcing ltd.</h2>
-                <div class="module-subtitle font-serif">We will always put your requirements first and work as your dedicated representative.</div>
-            </div>
-        </div>
-        <hr class="divider-w pt-20">
-
-        <!-- Dynamic Process Content Loop -->
-        <div class="row mb-60">
             {% for content in process_content %}
-            <div class="col-sm-6 col-md-3 col-lg-3">
-                <div class="alt-features-item">
-                    <div class="alt-features-icon"><span class="icon-strategy"></span></div>
-                    <h3 class="alt-features-title font-alt">{{ content.title }}</h3>
-                    <p>{{ content.description|safe }}</p>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-
-        <!-- Dynamic Process Data Loop -->
-        <div class="row">
-            {% for data in process_data %}
-            <div class="col-sm-6 col-md-3 col-lg-3">
-                <div class="alt-features-item">
-                    <div class="alt-features-icon"><img src="{{ data.image.url }}" alt="{{ data.title }}"></div>
-                    <h3 class="alt-features-title font-alt">{{ data.title }}</h3>
-                    <p>{{ data.description|safe }}</p>
-                </div>
+            <div class="col-sm-12 text-center">
+                <h3 class="module-title font-alt">{{ content.title }}</h3>
+                <div class="module-subtitle font-serif">{{ content.description|safe }}</div>
             </div>
             {% endfor %}
         </div>
     </div>
 </section>
+{% else %}
+<p class="text-center">No content available.</p>
+{% endif %}
+
+<!-- Dynamic Process Data Loop -->
+{% if process_data %}
+<section class="module" style="margin-top:-200px;">
+    <div class="container">
+        <div class="row">
+            <div class="row multi-columns-row">
+               {% for data in process_data %}
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="content-box">
+                  <div class="content-box-image"><img src="{{ data.image.url }}" alt=""/></div>
+                  <h3 class="content-box-title font-serif">{{ data.title }}</h3>
+                  <p>{{ data.description|safe }}</p>
+                </div>
+              </div>
+               {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% else %}
+<p class="text-center">No process data available.</p>
+{% endif %}
 
 {% endblock %}

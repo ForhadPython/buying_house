@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import ServiceBanner, ServiceData, WorkTogether
 
+
 def services_page(request):
     service_banners = ServiceBanner.objects.first()  # Get the first banner (single object)
     service_data = ServiceData.objects.all()  # Fetch all service data
