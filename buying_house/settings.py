@@ -100,6 +100,7 @@ CKEDITOR_CONFIGS = {
 #    }
 # }
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
