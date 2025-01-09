@@ -4,7 +4,7 @@
 
 <!-- About Banner Section (Dynamic) -->
 {% if about_banner %}
-<section class="module bg-dark-60 contact-page-header bg-dark"
+<section class="module bg-dark-0 contact-page-header bg-dark"
          style="background-image: url('{{ about_banner.image.url }}');
          background-size: cover;
          background-position: center;
@@ -12,7 +12,7 @@
          height: auto;
          min-height: 300px;">
     <div class="container">
-        <div class="row align-items-center" style="height: 100%;">
+        <div class="row align-items-center" style="margin-top: 5%;">
             <div class="col-sm-6 col-sm-offset-3 text-center">
                 <h2 class="module-title font-alt">{{ about_banner.title }}</h2>
                 <div class="module-subtitle font-serif">{{ about_banner.description|safe }}</div>

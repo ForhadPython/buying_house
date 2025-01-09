@@ -3,36 +3,204 @@
 {% block content %}
 
 <!-- @@@ Home Banner Section @@@ -->
-<section class="home-section home-full-height bg-dark-30" id="home" data-background="{{ home_banner.link }}">
-    <div class="video-player" data-property="{
-        videoURL:'{{ home_banner.video_url }}',
-        containment:'.home-section',
-        startAt:{{ home_banner.start_at }},
-        mute:{{ home_banner.mute|yesno:"true,false" }},
-        autoPlay:{{ home_banner.auto_play|yesno:"true,false" }},
-        loop:{{ home_banner.loop|yesno:"true,false" }},
-        opacity:{{ home_banner.opacity }},
-        showControls:{{ home_banner.show_controls|yesno:"true,false" }},
-        showYTLogo:{{ home_banner.show_yt_logo|yesno:"true,false" }},
-        vol:{{ home_banner.volume }}
-    }"></div>
+<!--<section class="home-section home-full-height bg-dark-0 bg-dark" id="home" data-background="{{ home_banner.link }}">-->
+<!--    <div class="video-player" data-property="{-->
+<!--        videoURL:'{{ home_banner.video_url }}',-->
+<!--        containment:'.home-section',-->
+<!--        startAt:{{ home_banner.start_at }},-->
+<!--        mute:{{ home_banner.mute|yesno:"true,false"}},-->
+<!--        autoPlay:{{ home_banner.auto_play|yesno:"true,false" }},-->
+<!--        loop:{{ home_banner.loop|yesno:"true,false" }},-->
+<!--        opacity:{{ home_banner.opacity }},-->
+<!--        showControls:{{ home_banner.show_controls|yesno:"true,false" }},-->
+<!--        showYTLogo:{{ home_banner.show_yt_logo|yesno:"true,false" }},-->
+<!--        vol:{{ home_banner.volume }}-->
+<!--    }"></div>-->
 
-    <div class="video-controls-box">
-        <div class="container">
-            <div class="video-controls">
-                <a class="fa fa-volume-up" id="video-volume" href="#">&nbsp;</a>
-                <a class="fa fa-pause" id="video-play" href="#">&nbsp;</a>
+<!--    <div class="video-controls-box">-->
+<!--        <div class="container">-->
+<!--            <div class="video-controls">-->
+<!--                <a class="fa fa-volume-up" id="video-volume" href="#">&nbsp;</a>-->
+<!--                <a class="fa fa-pause" id="video-play" href="#">&nbsp;</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="titan-caption">-->
+<!--        <div class="caption-content">-->
+<!--            <div class="font-alt mb-30 titan-title-size-1">{{ home_banner.short_title }}</div>-->
+<!--            <div class="font-alt mb-40 titan-title-size-4">{{ home_banner.title }}</div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
+<style>
+/* Your CSS file or within a <style> tag */
+.swiper-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.swiper-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+/* Adjust the caption and controls if necessary */
+</style>
+
+<!--<section class="home-section home-full-height bg-dark-0 bg-dark" id="home">-->
+<!--    {% if home_banner.is_video %}-->
+<!--        &lt;!&ndash; Video Player &ndash;&gt;-->
+<!--        <div class="video-player" data-property="{-->
+<!--            videoURL:'{{ home_banner.video_url }}',-->
+<!--            containment:'.home-section',-->
+<!--            startAt:{{ home_banner.start_at }},-->
+<!--            mute:{{ home_banner.mute|yesno:"true,false"}},-->
+<!--            autoPlay:{{ home_banner.auto_play|yesno:"true,false" }},-->
+<!--            loop:{{ home_banner.loop|yesno:"true,false" }},-->
+<!--            opacity:{{ home_banner.opacity }},-->
+<!--            showControls:{{ home_banner.show_controls|yesno:"true,false" }},-->
+<!--            showYTLogo:{{ home_banner.show_yt_logo|yesno:"true,false" }},-->
+<!--            vol:{{ home_banner.volume }}-->
+<!--        }"></div>-->
+<!--    {% else %}-->
+<!--        &lt;!&ndash; Full-Width Image Slider &ndash;&gt;-->
+<!--        <div class="swiper-container">-->
+<!--            <div class="swiper-wrapper">-->
+<!--                {% for image in banner_images %}-->
+<!--                    <div class="swiper-slide">-->
+<!--                        <img src="{{ image.image.url }}" alt="{{ image.caption }}" class="img-fluid" style="width: 100%; height: 100vh; object-fit: cover;">-->
+<!--                        {% if image.caption %}-->
+<!--                            <div class="swiper-caption">-->
+<!--                                {{ image.caption }}-->
+<!--                            </div>-->
+<!--                        {% endif %}-->
+<!--                    </div>-->
+<!--                {% endfor %}-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Add Pagination &ndash;&gt;-->
+<!--            <div class="swiper-pagination"></div>-->
+<!--            &lt;!&ndash; Add Navigation &ndash;&gt;-->
+<!--            <div class="swiper-button-next"></div>-->
+<!--            <div class="swiper-button-prev"></div>-->
+<!--        </div>-->
+<!--    {% endif %}-->
+
+<!--    &lt;!&ndash; Common Caption &ndash;&gt;-->
+<!--    <div class="titan-caption">-->
+<!--        <div class="caption-content">-->
+<!--            <div class="font-alt mb-30 titan-title-size-1">{{ home_banner.short_title }}</div>-->
+<!--            <div class="font-alt mb-40 titan-title-size-4">{{ home_banner.title }}</div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
+<section class="home-section home-full-height bg-dark-0 bg-dark" id="home">
+    {% if home_banner.is_video %}
+        <!-- Video Player -->
+        <div class="video-player" data-property="{
+            videoURL:'{{ home_banner.video_url }}',
+            containment:'.home-section',
+            startAt:{{ home_banner.start_at }},
+            mute:{{ home_banner.mute|yesno:"true,false"}},
+            autoPlay:{{ home_banner.auto_play|yesno:"true,false" }},
+            loop:{{ home_banner.loop|yesno:"true,false" }},
+            opacity:{{ home_banner.opacity }},
+            showControls:{{ home_banner.show_controls|yesno:"true,false" }},
+            showYTLogo:{{ home_banner.show_yt_logo|yesno:"true,false" }},
+            vol:{{ home_banner.volume }}
+        }"></div>
+    {% else %}
+        <!-- Full-Width Image Slider -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {% for image in banner_images %}
+                    <div class="swiper-slide">
+                        <img src="{{ image.image.url }}" alt="{{ image.caption }}" class="img-fluid" style="width: 100%; height: 100vh; object-fit: cover;">
+                        {% if image.caption %}
+                            <div class="swiper-caption">
+                                {{ image.caption }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
             </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
         </div>
-    </div>
+    {% endif %}
 
+    <!-- Common Caption -->
     <div class="titan-caption">
-        <div class="caption-content">
+    <div class="caption-content">
+        {% if home_banner.short_title %}
             <div class="font-alt mb-30 titan-title-size-1">{{ home_banner.short_title }}</div>
+        {% endif %}
+        {% if home_banner.title %}
             <div class="font-alt mb-40 titan-title-size-4">{{ home_banner.title }}</div>
-        </div>
+        {% endif %}
     </div>
+</div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Check if Swiper container exists
+        var swiperContainer = document.querySelector('.swiper-container');
+        if (swiperContainer) {
+            var swiper = new Swiper('.swiper-container', {
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        }
+    });
+</script>
+
+
 <br/><br/>
 <!-- @@@ End Home Banner Section @@@ -->
 
@@ -298,7 +466,6 @@
       </div>
     </div>
 </section>
-
 <!--<section class="module" id="team" style="margin-top: -35px;">-->
 <!--  <div class="container">-->
 <!--    <div class="row">-->
@@ -449,6 +616,28 @@
     </div>
   </div>
 </section><br/><br/>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var swiperContainer = document.querySelector('.swiper-container');
+    if (swiperContainer) {
+        var swiper = new Swiper('.swiper-container', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    }
+});
+</script>
 
 
 {% endblock %}

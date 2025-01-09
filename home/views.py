@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from .models import *
 
+
 def home(request):
     home_banner = HomeBanner.objects.first()  # Replace with actual query
+    banner_images = home_banner.images.all() if home_banner and home_banner.is_video is False else []
     home_about = HomeAbout.objects.first()
     our_services = OurServiceData.objects.all()
     products = OurProduct.objects.all()
@@ -15,6 +17,7 @@ def home(request):
     offices = GlobalCollaborationOffice.objects.all()
     context = {
         'home_banner': home_banner,
+        'banner_images': banner_images,
         'home_about': home_about,
         'our_services': our_services,
         'products': products,
@@ -26,4 +29,4 @@ def home(request):
         'collaborations': collaborations,
         'offices': offices,
     }
-    return render(request, 'index.html',context)
+    return render(request, 'index.html', context)
