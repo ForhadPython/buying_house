@@ -27,20 +27,20 @@ class HomeBannerImage(models.Model):
 
 
 class HomeAbout(models.Model):
-    image = models.ImageField(upload_to='about_images/', null=True)
-    title = models.CharField(max_length=150)
-    short_desc = RichTextField()
-    description = RichTextField()
-    link = models.CharField(max_length=150)
+    image = models.ImageField(upload_to='about_images/', null=True,blank=True)
+    title = models.CharField(max_length=150,null=True, blank=True)
+    short_desc = RichTextField(null=True, blank=True)
+    description = RichTextField(null=True, blank=True)
+    link = models.CharField(max_length=150,null=True, blank=True)
 
     def __str__(self):
         return self.title
 
 
 class OurServiceData(models.Model):
-    image = models.ImageField(upload_to='service-data/', null=True)
-    title = models.CharField(max_length=100)
-    description = models.TextField()
+    image = models.ImageField(upload_to='service-data/', null=True,blank=True)
+    title = models.CharField(max_length=100,null=True,blank=True)
+    description = RichTextField(null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -48,11 +48,10 @@ class OurServiceData(models.Model):
 
 # Product Section
 class OurProduct(models.Model):
-    image = models.ImageField(upload_to='products-info/', null=True)
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    link = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='products-info/',null=True,blank=True)
+    name = models.CharField(max_length=100,null=True,blank=True)
+    description = RichTextField(null=True, blank=True)
+    link = models.CharField(max_length=255,null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -61,13 +60,13 @@ class OurProduct(models.Model):
 # Competitive Advantage Section
 
 class CompetitiveAdvantageImg(models.Model):
-    image = models.ImageField(upload_to='competitive/', null=True)
+    image = models.ImageField(upload_to='competitive/',null=True,blank=True)
 
 
 class CompetitiveAdvantageInfo(models.Model):
-    icon = models.ImageField(upload_to='competitive-icon/', null=True)
-    title = models.CharField(max_length=100)
-    description = models.TextField()
+    icon = models.ImageField(upload_to='competitive-icon/', null=True,blank=True)
+    title = models.CharField(max_length=100,null=True,blank=True)
+    description = RichTextField(null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -88,13 +87,17 @@ class OurFeatureInfo(models.Model):
 
 class FeatureSlider(models.Model):
     """Model for the Testimonials section"""
-    description = models.TextField()
-    short_title = models.CharField(max_length=100)
-    short_name = models.CharField(max_length=100)
+    description = RichTextField(null=True, blank=True)
+    short_title = models.CharField(max_length=200,null=True, blank=True)
+    short_name = models.CharField(max_length=100,null=True, blank=True)
     background_image = models.ImageField(upload_to='feature-slider/', null=True, blank=True)
 
     def __str__(self):
         return self.short_name
+
+class FeatureSliderImage(models.Model):
+    """Model for the Testimonials section"""
+    background_image = models.ImageField(upload_to='feature-slider/', null=True, blank=True)
 
 
 class HowWeWork(models.Model):

@@ -43,6 +43,8 @@ def home(request):
         'banner_images': banner_images,
         'home_about': HomeAbout.objects.first(),
         'our_services': OurServiceData.objects.all(),
+        'feature_slider': FeatureSlider.objects.all(),
+        'feature_slider_image': FeatureSliderImage.objects.all(),
         'products': OurProduct.objects.all(),
         'competitive_images': CompetitiveAdvantageImg.objects.all(),
         'competitive_info': CompetitiveAdvantageInfo.objects.all(),
