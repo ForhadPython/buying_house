@@ -6,21 +6,18 @@ from django.utils.timezone import now
 # Home Section
 class HomeBanner(models.Model):
     video_url = models.URLField(blank=True, null=True)
-    start_at = models.IntegerField(default=0, null=True, blank=True)
+    start_at = models.IntegerField(default=1, null=True, blank=True)
     mute = models.BooleanField(default=False, null=True, blank=True)
     auto_play = models.BooleanField(default=True, null=True, blank=True)
     loop = models.BooleanField(default=True, null=True, blank=True)
-    opacity = models.IntegerField(default=1)
-    show_controls = models.BooleanField(default=False, null=True, blank=True)
+    opacity = models.IntegerField(default=0)
+    show_controls = models.BooleanField(default=True, null=True, blank=True)
     show_yt_logo = models.BooleanField(default=False, null=True, blank=True)
     volume = models.IntegerField(default=25, null=True, blank=True)
-    short_title = models.CharField(max_length=100, null=True, blank=True)
-    title = models.CharField(max_length=60, null=True, blank=True)
+    short_title = models.CharField(max_length=990, null=True, blank=True)
+    title = models.CharField(max_length=60, default="Untitled", null=True, blank=True)
     link = models.URLField(max_length=200, null=True, blank=True)
-    is_video = models.BooleanField(default=False)  # Checkbox to toggle between video and image slider
-
-    def __str__(self):
-        return self.title or 'Home Banner'
+    is_video = models.BooleanField(default=False)
 
 
 class HomeBannerImage(models.Model):

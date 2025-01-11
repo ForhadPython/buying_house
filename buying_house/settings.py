@@ -107,7 +107,7 @@ DATABASES = {
         'NAME': 'hellotockan',
         'USER': 'hellotockan_website',
         'PASSWORD': 'hellotockan@321##**',
-        'HOST': 'localhost',
+        'HOST': '182.163.115.178',
         'PORT': '5432',
     }
 }

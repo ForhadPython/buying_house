@@ -3,7 +3,7 @@ from .models import *
 
 
 def home(request):
-    home_banner = HomeBanner.objects.first()  # Replace with actual query
+    home_banner = HomeBanner.objects.first() # Replace with actual query
     banner_images = home_banner.images.all() if home_banner and home_banner.is_video is False else []
     home_about = HomeAbout.objects.first()
     our_services = OurServiceData.objects.all()
