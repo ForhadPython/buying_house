@@ -125,56 +125,189 @@
 <!--    </div>-->
 <!--</section>-->
 
+<!--<section class="home-section home-full-height bg-dark-0 bg-dark" id="home">-->
+<!--    {% if home_banner.is_video %}-->
+<!--        &lt;!&ndash; Video Player &ndash;&gt;-->
+<!--        <div class="video-player" data-property="{-->
+<!--            videoURL:'{{ home_banner.video_url }}',-->
+<!--            containment:'.home-section',-->
+<!--            startAt:{{ home_banner.start_at }},-->
+<!--            mute:{{ home_banner.mute|yesno:"true,false"}},-->
+<!--            autoPlay:{{ home_banner.auto_play|yesno:"true,false" }},-->
+<!--            loop:{{ home_banner.loop|yesno:"true,false" }},-->
+<!--            opacity:{{ home_banner.opacity }},-->
+<!--            showControls:{{ home_banner.show_controls|yesno:"true,false" }},-->
+<!--            showYTLogo:{{ home_banner.show_yt_logo|yesno:"true,false" }},-->
+<!--            vol:{{ home_banner.volume }}-->
+<!--        }"></div>-->
+<!--    {% else %}-->
+<!--        &lt;!&ndash; Full-Width Image Slider &ndash;&gt;-->
+<!--        <div class="swiper-container">-->
+<!--            <div class="swiper-wrapper">-->
+<!--                {% for image in banner_images %}-->
+<!--                    <div class="swiper-slide">-->
+<!--                        <img src="{{ image.image.url }}" alt="{{ image.caption }}" class="img-fluid" style="width: 100%; height: 100vh; object-fit: cover;">-->
+<!--                        {% if image.caption %}-->
+<!--                            <div class="swiper-caption">-->
+<!--                                {{ image.caption }}-->
+<!--                            </div>-->
+<!--                        {% endif %}-->
+<!--                    </div>-->
+<!--                {% endfor %}-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Add Pagination &ndash;&gt;-->
+<!--            <div class="swiper-pagination"></div>-->
+<!--            &lt;!&ndash; Add Navigation &ndash;&gt;-->
+<!--            <div class="swiper-button-next"></div>-->
+<!--            <div class="swiper-button-prev"></div>-->
+<!--        </div>-->
+<!--    {% endif %}-->
+
+<!--    &lt;!&ndash; Common Caption &ndash;&gt;-->
+<!--    <div class="titan-caption">-->
+<!--    <div class="caption-content">-->
+<!--        {% if home_banner.short_title %}-->
+<!--            <div class="font-alt mb-30 titan-title-size-1">{{ home_banner.short_title }}</div>-->
+<!--        {% endif %}-->
+<!--        {% if home_banner.title %}-->
+<!--            <div class="font-alt mb-40 titan-title-size-4">{{ home_banner.title }}</div>-->
+<!--        {% endif %}-->
+<!--    </div>-->
+<!--</div>-->
+<!--</section>-->
+
+<!--<section class="home-section home-full-height bg-dark-0 bg-dark" id="home">-->
+<!--    {% if home_banner %}-->
+<!--        {% if home_banner.is_video %}-->
+<!--            &lt;!&ndash; Video Player &ndash;&gt;-->
+<!--        <div class="video-player" data-property="{-->
+<!--            videoURL: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',-->
+<!--            containment: '.home-section',-->
+<!--            startAt: {{ home_banner.start_at }},-->
+<!--            mute: {{ home_banner.mute|yesno:"true,false" }},-->
+<!--            autoPlay: {{ home_banner.auto_play|yesno:"true,false" }},-->
+<!--            loop: {{ home_banner.loop|yesno:"true,false" }},-->
+<!--            opacity: {{ home_banner.opacity }},-->
+<!--            showControls: {{ home_banner.show_controls|yesno:"true,false" }},-->
+<!--            showYTLogo: {{ home_banner.show_yt_logo|yesno:"true,false" }},-->
+<!--            vol: {{ home_banner.volume }}-->
+<!--        }"></div>-->
+<!--        {% else %}-->
+<!--            &lt;!&ndash; Full-Width Image Slider &ndash;&gt;-->
+<!--            <div class="swiper-container">-->
+<!--                <div class="swiper-wrapper">-->
+<!--                    {% if banner_images %}-->
+<!--                        {% for image in banner_images %}-->
+<!--                            <div class="swiper-slide">-->
+<!--                                <img src="{{ image.image.url }}" alt="{{ image.caption }}" class="img-fluid"-->
+<!--                                     style="width: 100%; height: 100vh; object-fit: cover;">-->
+<!--                                {% if image.caption %}-->
+<!--                                    <div class="swiper-caption">-->
+<!--                                        {{ image.caption }}-->
+<!--                                    </div>-->
+<!--                                {% endif %}-->
+<!--                            </div>-->
+<!--                        {% endfor %}-->
+<!--                    {% else %}-->
+<!--                        &lt;!&ndash; Fallback content if no images are provided &ndash;&gt;-->
+<!--                        <div class="swiper-slide">-->
+<!--                            <p>No banner images available.</p>-->
+<!--                        </div>-->
+<!--                    {% endif %}-->
+<!--                </div>-->
+<!--                &lt;!&ndash; Add Pagination &ndash;&gt;-->
+<!--                <div class="swiper-pagination"></div>-->
+<!--                &lt;!&ndash; Add Navigation &ndash;&gt;-->
+<!--                <div class="swiper-button-next"></div>-->
+<!--                <div class="swiper-button-prev"></div>-->
+<!--            </div>-->
+<!--        {% endif %}-->
+
+<!--        &lt;!&ndash; Common Caption &ndash;&gt;-->
+<!--        <div class="titan-caption">-->
+<!--            <div class="caption-content">-->
+<!--                {% if home_banner.short_title %}-->
+<!--                    <div class="font-alt mb-30 titan-title-size-1">{{ home_banner.short_title }}</div>-->
+<!--                {% endif %}-->
+<!--                {% if home_banner.title %}-->
+<!--                    <div class="font-alt mb-40 titan-title-size-4">{{ home_banner.title }}</div>-->
+<!--                {% endif %}-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    {% else %}-->
+<!--        &lt;!&ndash; Fallback content if no home banner is provided &ndash;&gt;-->
+<!--        <div class="no-banner">-->
+<!--            <p>No banner available at the moment.</p>-->
+<!--        </div>-->
+<!--    {% endif %}-->
+<!--</section>-->
+
+
 <section class="home-section home-full-height bg-dark-0 bg-dark" id="home">
-    {% if home_banner.is_video %}
-        <!-- Video Player -->
-        <div class="video-player" data-property="{
-            videoURL:'{{ home_banner.video_url }}',
-            containment:'.home-section',
-            startAt:{{ home_banner.start_at }},
-            mute:{{ home_banner.mute|yesno:"true,false"}},
-            autoPlay:{{ home_banner.auto_play|yesno:"true,false" }},
-            loop:{{ home_banner.loop|yesno:"true,false" }},
-            opacity:{{ home_banner.opacity }},
-            showControls:{{ home_banner.show_controls|yesno:"true,false" }},
-            showYTLogo:{{ home_banner.show_yt_logo|yesno:"true,false" }},
-            vol:{{ home_banner.volume }}
-        }"></div>
-    {% else %}
-        <!-- Full-Width Image Slider -->
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                {% for image in banner_images %}
-                    <div class="swiper-slide">
-                        <img src="{{ image.image.url }}" alt="{{ image.caption }}" class="img-fluid" style="width: 100%; height: 100vh; object-fit: cover;">
-                        {% if image.caption %}
-                            <div class="swiper-caption">
-                                {{ image.caption }}
+    {% if home_banner %}
+        {% if home_banner.is_video %}
+            <!-- Video Player -->
+            <div class="video-player" data-property="{
+                videoURL: '{{ home_banner.video_url }}',
+                containment: '.home-section',
+                startAt: {{ home_banner.start_at }},
+                mute: {{ home_banner.mute|yesno:"true,false" }},
+                autoPlay: {{ home_banner.auto_play|yesno:"true,false" }},
+                loop: {{ home_banner.loop|yesno:"true,false" }},
+                opacity: {{ home_banner.opacity }},
+                showControls: {{ home_banner.show_controls|yesno:"true,false" }},
+                showYTLogo: {{ home_banner.show_yt_logo|yesno:"true,false" }},
+                vol: {{ home_banner.volume }}
+            }"></div>
+        {% else %}
+            <!-- Full-Width Image Slider -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    {% if banner_images %}
+                        {% for image in banner_images %}
+                            <div class="swiper-slide">
+                                <figure>
+                                    <img src="{{ image.image.url }}" alt="{{ image.caption|default:'Banner image' }}"
+                                         class="img-fluid" style="width: 100%; height: 100vh; object-fit: cover;"
+                                         loading="lazy">
+                                    {% if image.caption %}
+                                        <figcaption class="swiper-caption">{{ image.caption }}</figcaption>
+                                    {% endif %}
+                                </figure>
                             </div>
-                        {% endif %}
-                    </div>
-                {% endfor %}
+                        {% endfor %}
+                    {% else %}
+                        <!-- Fallback content if no images are provided -->
+                        <div class="swiper-slide">
+                            <p>No banner images available.</p>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
-            <!-- Add Pagination -->
-            <div class="swiper-pagination"></div>
-            <!-- Add Navigation -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
+        {% endif %}
+
+        <!-- Common Caption -->
+        <div class="titan-caption">
+            <div class="caption-content">
+                {% if home_banner.short_title %}
+                    <div class="font-alt mb-30 titan-title-size-1">{{ home_banner.short_title }}</div>
+                {% endif %}
+                {% if home_banner.title %}
+                    <div class="font-alt mb-40 titan-title-size-4">{{ home_banner.title }}</div>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        <div class="no-banner">
+            <p>No banner available at the moment.</p>
         </div>
     {% endif %}
-
-    <!-- Common Caption -->
-    <div class="titan-caption">
-    <div class="caption-content">
-        {% if home_banner.short_title %}
-            <div class="font-alt mb-30 titan-title-size-1">{{ home_banner.short_title }}</div>
-        {% endif %}
-        {% if home_banner.title %}
-            <div class="font-alt mb-40 titan-title-size-4">{{ home_banner.title }}</div>
-        {% endif %}
-    </div>
-</div>
 </section>
+
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

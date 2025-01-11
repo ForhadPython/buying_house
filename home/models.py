@@ -23,7 +23,7 @@ class HomeBanner(models.Model):
 class HomeBannerImage(models.Model):
     home_banner = models.ForeignKey(HomeBanner, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='home_banner_images/')
-    caption = models.CharField(max_length=255, null=True, blank=True)  # Optional caption
+    caption = models.CharField(max_length=255, null=True, blank=True)
 
 
 class HomeAbout(models.Model):
