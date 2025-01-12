@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function () {
               {% endif %}
             </div>
             <h3 class="alt-features-title font-alt">{{ info.title }}</h3>
-            <p>{{ info.description }}</p>
+            <p>{{ info.description|safe|truncatechars:200 }}</p>
           </div>
         {% endfor %}
       </div>
@@ -340,7 +340,7 @@ document.addEventListener('DOMContentLoaded', function () {
           {% endif %}
 
           <h3 class="features-title font-alt">{{ item.title }}</h3>
-          <p>{{ item.description }}</p>
+          <p>{{ item.description|safe|truncatechars:200 }}</p>
         </div>
       </div>
       {% endfor %}
@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 {% endif %}
               </div>
               <h3 class="features-title font-alt">{{ item.title }}</h3>
-              <p>{{ item.description }}</p>
+              <p>{{ item.description|safe|truncatechars:200 }}</p>
             </div>
           </div>
         {% endfor %}
