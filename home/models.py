@@ -73,13 +73,13 @@ class CompetitiveAdvantageInfo(models.Model):
 
 
 class OurFeatureImg(models.Model):
-    image = models.ImageField(upload_to='featureImg/', null=True)
+    image = models.ImageField(upload_to='featureImg/', null=True, blank=True)
 
 
 class OurFeatureInfo(models.Model):
-    icon = models.ImageField(upload_to='feature-icon/', null=True)
+    icon = models.ImageField(upload_to='feature-icon/', null=True, blank=True)
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = RichTextField(null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -103,7 +103,7 @@ class FeatureSliderImage(models.Model):
 class HowWeWork(models.Model):
     image = models.ImageField(upload_to='how-we-work/', null=True, blank=True)
     title = models.CharField(max_length=100)
-    description = models.TextField()
+    description = RichTextField(null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -111,8 +111,8 @@ class HowWeWork(models.Model):
 
 class WhyChooseUs(models.Model):
     image = models.ImageField(upload_to='why-choose-us/', null=True, blank=True)
-    title = models.CharField(max_length=100)
-    description = models.TextField()
+    title = models.CharField(max_length=100,null=True, blank=True)
+    description = RichTextField(null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -120,9 +120,9 @@ class WhyChooseUs(models.Model):
 
 # Model for Team Member
 class MeetOurTeam(models.Model):
-    name = models.CharField(max_length=255)
-    role = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='team_images/')
+    name = models.CharField(max_length=255,null=True, blank=True)
+    role = models.CharField(max_length=255,null=True, blank=True)
+    image = models.ImageField(upload_to='team_images/',null=True, blank=True)
     description = models.TextField()
 
     def __str__(self):
@@ -131,15 +131,15 @@ class MeetOurTeam(models.Model):
 
 # Model for Blog Post
 class BlogPost(models.Model):
-    title = models.CharField(max_length=255)
-    description = RichTextField(config_name='default')
-    image = models.ImageField(upload_to='blog_images/')
-    comments_count = models.IntegerField(default=0)
-    link = models.URLField()
+    title = models.CharField(max_length=255,null=True, blank=True)
+    description = RichTextField(config_name='default',null=True, blank=True)
+    image = models.ImageField(upload_to='blog_images/',null=True, blank=True)
+    comments_count = models.IntegerField(default=0,null=True, blank=True)
+    link = models.URLField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True,null=True, blank=True)  # Add this line
 
     def __str__(self):
         return self.title
-
 
 # Model for Global Collaboration Country
 class GlobalCollaboration(models.Model):
