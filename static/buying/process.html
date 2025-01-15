@@ -2,26 +2,78 @@
 {% load static %}
 {% block content %}
 
-<!-- Process Banner Section (Dynamic) -->
 {% if process_banner %}
-<section class="module bg-dark-0 contact-page-header bg-dark"
-         style="background-image: url({{ process_banner.image.url }});
-         background-size: cover;
-         background-position: center;
-         width: 100%;
-         height: auto;
-         min-height: 300px;">
+<section class="module bg-dark-0 contact-page-header bg-dark">
     <div class="container">
-        <div class="row" style="margin-top:5%">
-            <div class="col-sm-6 col-sm-offset-3 text-center">
+        <div class="row" style="margin-top: 5%;">
+            <div class="col-sm-6 col-sm-offset-3 banner-containers">
                 <h2 class="module-title font-alt">{{ process_banner.title }}</h2>
                 <div class="module-subtitle font-serif">{{ process_banner.description|safe }}</div>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+
+.contact-page-header {
+    position: relative;
+    width: 100%;
+    min-height: 380px;
+    background-image: url('{{ process_banner.image.url }}');
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+}
+
+.banner-containers {
+    position: absolute;
+    top: 70%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+.module-title, .module-subtitle {
+    color: white;
+}
+@media(min-width: 768px) {
+    .col-sm-offset-3 {
+        margin-left: 0%;
+    }
+}
+/* Mobile responsiveness */
+@media only screen and (max-width: 500px) {
+    .contact-page-header {
+        min-height: 200px;
+    }
+
+    .module-title {
+        font-size: 1.5em;
+    }
+
+    .module-subtitle {
+        font-size: 1em;
+    }
+}
+
+/* Desktop responsiveness */
+@media only screen and (min-width: 768px) {
+    .banner-containers {
+        width: 100%;
+        max-width: 800px;
+        text-align: center;
+    }
+
+    .module-title, .module-subtitle {
+        max-width: 100%;
+    }
+}
+</style>
+
 {% else %}
-<p class="text-center">No banner available.</p>
+<p>No banner available.</p>
 {% endif %}
 
 <!-- Process Content Section (Dynamic) -->
@@ -31,8 +83,8 @@
         <div class="row">
             {% for content in process_content %}
             <div class="col-sm-12 text-center">
-                <h3 class="module-title font-alt">{{ content.title }}</h3>
-                <div class="module-subtitle font-serif">{{ content.description|safe }}</div>
+                <h3 class="module-title font-alt" style="color:black">{{ content.title }}</h3>
+                <div class="module-subtitle font-serif" style="color:black">{{ content.description|safe }}</div>
             </div>
             {% endfor %}
         </div>
@@ -53,7 +105,11 @@
                 <div class="content-box">
                   <div class="content-box-image"><img src="{{ data.image.url }}" alt=""/></div>
                   <h3 class="content-box-title font-serif">{{ data.title }}</h3>
-                  <p>{{ data.description|safe }}</p>
+                   {% if data.description|striptags|length > 150 %}
+                        <p>{{ data.description|striptags|slice:":150" }}...</p>
+                    {% else %}
+                        <p>{{ data.description|striptags }}</p>
+                    {% endif %}
                 </div>
               </div>
                {% endfor %}
@@ -61,6 +117,7 @@
         </div>
     </div>
 </section>
+
 {% else %}
 <p class="text-center">No process data available.</p>
 {% endif %}

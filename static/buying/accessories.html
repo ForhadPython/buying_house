@@ -2,29 +2,84 @@
 {% load static %}
 {% block content %}
 
-<!-- Banner Section -->
 {% if banners %}
-<section class="module bg-dark-0 contact-page-header bg-dark"
-         style="background-image: url({{ banners.0.image.url }});
-         background-size: cover;
-         background-position: center;
-         width: 100%;
-         height: auto;
-         min-height: 300px;">
+<section class="module contact-page-header bg-dark">
     <div class="container">
-        <div class="row" style="margin-top:5%">
-            <div class="col-sm-6 col-sm-offset-3">
-                <h2 class="module-title font-alt">{{ banners.0.title }}</h2>
+        <div class="row" style="margin-top: 5%;">
+            <div class="col-sm-6 col-sm-offset-3 text-center banner-container">
+                <h2 class="module-title font-alt" style="text-align: center !important;">{{ banners.0.title }}</h2>
                 <div class="module-subtitle font-serif">{{ banners.0.description|safe }}</div>
             </div>
         </div>
     </div>
 </section>
-{% else %}
-<p class="text-center">No banners available.</p>
-{% endif %}
-<br/><br/>
 
+<style>
+/* Prevent horizontal scroll */
+html, body {
+    overflow-x: hidden;
+}
+
+.contact-page-header {
+    position: relative;
+    width: 100%;
+    min-height: 380px;
+    background-image: url('{{ banners.0.image.url }}');
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+}
+
+.banner-container {
+    position: absolute;
+    top: 70%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+.module-title, .module-subtitle {
+    color: white;
+}
+@media(min-width: 768px) {
+    .col-sm-offset-3 {
+        margin-left: 0%;
+    }
+}
+/* Mobile responsiveness */
+@media only screen and (max-width: 500px) {
+    .contact-page-header {
+        min-height: 200px;
+    }
+
+    .module-title {
+        font-size: 1.5em;
+    }
+
+    .module-subtitle {
+        font-size: 1em;
+    }
+}
+
+/* Desktop responsiveness */
+@media only screen and (min-width: 768px) {
+    .banner-container {
+        width: 100%;
+        max-width: 800px;
+        text-align: center;
+    }
+
+    .module-title, .module-subtitle {
+        max-width: 100%;
+    }
+}
+</style>
+
+{% else %}
+<p>No banner available.</p>
+{% endif %}
+<br><br>
 <!-- Accessories Section -->
 {% if accessories %}
 {% for accessory in accessories %}
@@ -36,8 +91,8 @@
         <div class="col-xs-12 col-md-6 col-md-offset-6 side-image-text">
             <div class="row">
                 <div class="col-sm-12">
-                    <h2 class="module-title font-alt align-left">{{ accessory.title }}</h2>
-                    <div class="module-subtitle font-serif align-left">{{ accessory.short_desc|safe }}</div>
+                    <h2 class="module-title font-alt align-left" style="color:black;">{{ accessory.title }}</h2>
+                    <div class="module-subtitle font-serif align-left" style="color:black;">{{ accessory.short_desc|safe }}</div>
                     <p>{{ accessory.description|safe }}</p>
                     <a href="{{ accessory.link }}" class="btn btn-primary">Read More</a>
                 </div>

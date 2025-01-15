@@ -1,9 +1,9 @@
 from django.db import models
-from ckeditor.fields import RichTextField  # or RichTextUploadingField
+from ckeditor.fields import RichTextField
 
 
 class ServiceBanner(models.Model):
-    image = models.ImageField(upload_to='Carousel', null=True)
+    image = models.ImageField(upload_to='Carousel', blank=True)
     title = models.CharField(max_length=150)
     description = RichTextField(config_name='default')
 
@@ -12,7 +12,7 @@ class ServiceBanner(models.Model):
 
 
 class ServiceData(models.Model):
-    image = models.ImageField(upload_to='Carousel', null=True)
+    image = models.ImageField(upload_to='Carousel', blank=True)
     title = models.CharField(max_length=150)
     short_desc = RichTextField(config_name='default')
     description = RichTextField(config_name='default')

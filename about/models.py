@@ -17,21 +17,3 @@ class About(models.Model):
 
     def __str__(self):
         return self.title
-
-
-class SliderTitle(models.Model):
-    title = models.CharField(max_length=100)
-    description = RichTextField(config_name='default')  # Replace CKEditor5Field
-
-    def __str__(self):
-        return self.title
-
-
-class AboutSlider(models.Model):
-    image = models.ImageField(upload_to='Carousel', null=True)
-    title = models.CharField(max_length=150)
-    description = RichTextField(config_name='default')
-    link = models.CharField(max_length=500)
-
-    def __str__(self):
-        return self.title

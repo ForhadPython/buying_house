@@ -3,96 +3,91 @@
 {% block content %}
 
 <style>
-/* Your CSS file or within a <style> tag */
-.swiper-container {
+
+section {
+  width: 100%;
+  overflow: hidden;
+}
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+.col-xs-12, .col-sm-6, .col-md-3, .col-lg-3 {
+  max-width: 100%;
+  flex: 1 1 auto;
+}
+/* Ensure the images and slider take up full width */
+ .swiper-container {
     width: 100%;
-    height: 100vh;
+    height: 100%;  /* Ensures full height, adjust as needed */
     position: relative;
-}
-.swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-    /* Center slide text vertically */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
+  }
+
+  .swiper-wrapper {
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
+  }
+
+  .swiper-slide {
+    display: flex;
     justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
-}
-.swiper-slide img {
-    display: block;
+    position: relative;
+  }
+
+  .swiper-slide-figure {
+    margin: 0;
+    position: relative;
+    overflow: hidden;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.swiper-caption {
+    height: auto;
+  }
+
+  .banner-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;  /* Ensures image covers the container without stretching */
+  }
+
+  .swiper-caption {
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.5);
     padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    max-width: 80%;
     border-radius: 5px;
-}
-.swiper-container {
-    width: 100%;
-    height: 100vh; /* Ensures full height on all devices */
-    overflow: hidden;
-}
+  }
 
-.swiper-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.swiper-caption {
+  .swiper-pagination {
     position: absolute;
-    bottom: 20px;
-    left: 20px;
+    bottom: 10px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .swiper-button-next, .swiper-button-prev {
+    position: absolute;
+    top: 70%;
+    z-index: 10;
     color: white;
-    background: rgba(0, 0, 0, 0.5);
+    border: none;
     padding: 10px;
-    border-radius: 5px;
-    font-size: 1rem;
-}
+    cursor: pointer;
+    transform: translateY(-50%);
+  }
 
-
-/* Adjust the caption and controls if necessary */
+  .swiper-button-next {
+    right: 10px;
+  }
+  .swiper-button-prev {
+    left: 10px;
+  }
 </style>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Check if Swiper container exists
-    var swiperContainer = document.querySelector('.swiper-container');
-    if (swiperContainer) {
-        var swiper = new Swiper('.swiper-container', {
-            loop: true,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    }
-});
-</script>
-<section class="home-section home-full-height bg-dark-0 bg-dark" id="home">
+
+<section class="home-section1" style="height: auto !important;">
     {% if home_banner %}
         {% if home_banner.is_video %}
             <!-- Video Player -->
@@ -110,28 +105,21 @@ document.addEventListener('DOMContentLoaded', function () {
             }"></div>
         {% else %}
             <!-- Full-Width Image Slider -->
-            <div class="swiper-container">
+            <div class="swiper-container" style="width: 100%; height: auto;">
                 <div class="swiper-wrapper">
-                    {% if banner_images %}
-                        {% for image in banner_images %}
-                            <div class="swiper-slide">
-                                <figure>
-                                    <img src="{{ image.image.url }}" alt="{{ image.caption|default:'Banner image' }}"
-                                         class="img-fluid" style="width: 100% !important; height: 100vh; object-fit: cover;"
-                                         loading="lazy">
-                                    {% if image.caption %}
-                                        <figcaption class="swiper-caption">{{ image.caption }}</figcaption>
-                                    {% endif %}
-                                </figure>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        <!-- Fallback content if no images are provided -->
+                    {% for image in banner_images %}
                         <div class="swiper-slide">
-                            <p>No banner images available.</p>
+                            <figure class="swiper-slide-figure">
+                                <img src="{{ image.image.url }}" alt="{{ image.caption|default:'Banner image' }}" class="img-fluid banner-image" loading="lazy">
+                                {% if image.caption %}
+                                    <figcaption class="swiper-caption">{{ image.caption }}</figcaption>
+                                {% endif %}
+                            </figure>
                         </div>
-                    {% endif %}
+                    {% endfor %}
                 </div>
+
+                <!-- Pagination and Navigation -->
                 <div class="swiper-pagination"></div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -155,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
     {% endif %}
 </section>
+
 
 <br/><br/>
 <!-- @@@ End Home Banner Section @@@ -->
@@ -249,20 +238,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     <div class="row">
       <!-- Competitive Advantage Image (First Image) -->
-      <div class="col-md-6 col-lg-6 hidden-xs hidden-sm">
-        <div class="alt-services-image align-center">
-          <!-- Loop through competitive images and display the first image -->
-          {% if competitive_images %}
-            <img src="{{ competitive_images.0.image.url }}" alt="Feature Image">
-          {% endif %}
-        </div>
+      <div class="col-md-6 col-lg-6 hidden-xs hidden-sm alt-services-image">
+        {% if competitive_images %}
+          <img src="{{ competitive_images.0.image.url }}" alt="Feature Image">
+        {% endif %}
       </div>
+
       <!-- Competitive Advantage Info (Icon, Title, and Description) -->
-      <div class="col-sm-6 col-md-3 col-lg-3">
+      <div class="col-md-3 col-sm-6 col-xs-12">
         {% for info in competitive_info %}
           <div class="alt-features-item">
             <div class="alt-features-icon">
-              <!-- Check if the icon is an image and render it accordingly -->
               {% if info.icon %}
                 <img src="{{ info.icon.url }}" alt="{{ info.title }}">
               {% else %}
@@ -276,45 +262,17 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
     </div>
   </div>
+<style>
+@media (max-width: 767px) {
+    .alt-features-title {
+        position: static;
+        width: auto;
+        margin: 180px auto 8px;
+    }
+}
+</style>
 </section>
 
-<!--<hr class="divider-w">-->
-<!--<section-->
-<!--    class="module bg-dark-60 pt-0 pb-0 parallax-bg testimonial"-->
-<!--    data-background="{% if feature_slider_image.exists %}{{ feature_slider_image.first.background_image.url }}{% else %}assets/images/testimonial_bg.jpg{% endif %}">-->
-<!--    <div class="testimonials-slider pt-140 pb-140">-->
-<!--        <ul class="slides">-->
-<!--            {% for feature in feature_slider %}-->
-<!--            <li>-->
-<!--                <div class="container">-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-sm-12">-->
-<!--                            <div class="module-icon"><span class="icon-quote"></span></div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-sm-8 col-sm-offset-2">-->
-<!--                            <blockquote class="testimonial-text font-alt">-->
-<!--                                {{ feature.description|safe }}-->
-<!--                            </blockquote>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="row">-->
-<!--                        <div class="col-sm-4 col-sm-offset-4">-->
-<!--                            <div class="testimonial-author">-->
-<!--                                <div class="testimonial-caption font-alt">-->
-<!--                                    <div class="testimonial-title">{{ feature.short_title }}</div>-->
-<!--                                    <div class="testimonial-descr">{{ feature.short_name }}</div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--            {% endfor %}-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</section>-->
 
 <!--  @@@ FUNN BANNAR SLIDER @@@@  END -->
 
@@ -440,26 +398,23 @@ document.addEventListener('DOMContentLoaded', function () {
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var swiperContainer = document.querySelector('.swiper-container');
-    if (swiperContainer) {
-        var swiper = new Swiper('.swiper-container', {
-            loop: true,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    }
-});
+    document.addEventListener('DOMContentLoaded', function () {
+    var swiper = new Swiper('.swiper-container', {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  });
   const swiper = new Swiper('.swiper-container', {
     loop: true, // Allows infinite scrolling
     autoplay: {

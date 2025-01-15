@@ -2,47 +2,99 @@
 {% load static %}
 {% block content %}
 
- Sustainability Banner Section
 {% if sustain_banner %}
-<section
-    class="module bg-dark-0 contact-page-header bg-dark"
-    style="
-        background-image: url('{{ sustain_banner.banner_image.url }}');
-          background-size: cover;
-          background-position: center;
-          width: 100%;
-          height: auto;
-          min-height: 300px; /* Adjust this based on your design requirements */">
+<section class="module contact-page-header bg-dark">
     <div class="container">
         <div class="row" style="margin-top: 5%;">
-            <div class="col-sm-6 col-sm-offset-3 text-center">
+            <div class="col-sm-6 col-sm-offset-3 text-center banner-container">
                 <h2 class="module-title font-alt">{{ sustain_banner.banner_title }}</h2>
                 <div class="module-subtitle font-serif">{{ sustain_banner.banner_description|safe }}</div>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+/* Prevent horizontal scroll */
+html, body {
+    overflow-x: hidden;
+}
+
+.contact-page-header {
+    position: relative;
+    width: 100%;
+    min-height: 380px;
+    background-image: url('{{ sustain_banner.banner_image.url }}');
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+}
+
+.banner-container {
+    position: absolute;
+    top: 70%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+.module-title, .module-subtitle {
+    color: white;
+}
+@media(min-width: 768px) {
+    .col-sm-offset-3 {
+        margin-left: 0%;
+    }
+}
+/* Mobile responsiveness */
+@media only screen and (max-width: 500px) {
+    .contact-page-header {
+        min-height: 200px;
+    }
+
+    .module-title {
+        font-size: 1.5em;
+    }
+
+    .module-subtitle {
+        font-size: 1em;
+    }
+}
+
+/* Desktop responsiveness */
+@media only screen and (min-width: 768px) {
+    .banner-container {
+        width: 100%;
+        max-width: 800px;
+        text-align: center;
+    }
+
+    .module-title, .module-subtitle {
+        max-width: 100%;
+    }
+}
+</style>
+
 {% else %}
 <p>No banner available.</p>
 {% endif %}
 
+
 <br/><br/>
 <!-- Sustainability About Section-->
 {% for sustain_data in sustain_data %}
-<section class="module pt-0 pb-0" id="about">
-    <div class="row position-relative m-0">
-        {% if sustain_data.image %}
-        <div class="col-xs-12 col-md-6 side-image" data-background="{{ sustain_data.image.url }}" style="height:80%;"></div>
-        {% else %}
-        <div class="col-xs-12 col-md-6 side-image"></div>
-        {% endif %}
-        <div class="col-xs-12 col-md-6 col-md-offset-6 side-image-text">
-            <div class="col-sm-12" style="margin-top:-60px;">
-                <h2 class="module-title font-alt align-left">{{ sustain_data.title }}</h2>
-                <p>{{ sustain_data.description|safe }}</p>
-            </div>
+<section class="module pt-0 pb-0" id="about" style="margin-bottom: 50px;">
+    <div class="row position-relative align-items-center m-0">
+        <!-- Image Section -->
+        <div class="col-xs-12 col-md-6">
+            <img src="{{ sustain_data.image.url }}" alt="Sustainability Image" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0px;">
         </div>
-        <a class="section-scroll btn btn-border-w btn-round" href="#about">Learn More</a>
+        <!-- Text Section -->
+        <div class="col-xs-12 col-md-6 side-image-text" style="padding: 20px;">
+            <h2 class="module-title font-alt" style="color: #333; font-weight: bold; text-align:left;">{{ sustain_data.title }}</h2>
+            <p style="color: #555; line-height: 1.6;">{{ sustain_data.description|safe }}</p>
+        </div>
     </div>
 </section>
 {% endfor %}
@@ -54,9 +106,9 @@
 <section class="module">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-                <h2 class="module-title font-alt">Our Partner Certifications</h2>
-                <div class="module-subtitle font-serif">{{ partner_desc.partner_desc|safe }}.</div>
+            <div class="">
+                <h2 class="module-title font-alt" style="color:black; text-align:center;">Our Partner Certifications</h2>
+                <div class="module-subtitle font-serif" style="color:black;">{{ partner_desc.partner_desc|safe }}.</div>
             </div>
         </div>
         <div class="row">
@@ -78,5 +130,6 @@
 {% else %}
 <p>No partner description available.</p>
 {% endif %}
+
 
 {% endblock %}

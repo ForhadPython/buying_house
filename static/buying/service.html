@@ -2,80 +2,126 @@
 {% load static %}
 {% block content %}
 
-<!-- Service Banner Section (Dynamic) -->
-<section class="module bg-dark-0 contact-page-header bg-dark" style="background-image: url({{ service_banners.image.url }});
-        background-size: cover;
-        background-position: center;
-        width: 100%;
-        height: auto;
-        min-height: 300px; /* Adjust this based on your design requirements */
-    ">
+{% if service_banners %}
+<section class="module contact-page-header bg-dark">
     <div class="container">
-        <div class="row" style="margin-top:5%">
-            <div class="col-sm-6 col-sm-offset-3">
+        <div class="row" style="margin-top: 5%;">
+            <div class="col-sm-6 col-sm-offset-3 text-center banner-container">
                 <h2 class="module-title font-alt">{{ service_banners.title }}</h2>
                 <div class="module-subtitle font-serif">{{ service_banners.description|safe }}</div>
             </div>
         </div>
     </div>
 </section>
-<br><br/><br/>
 
-<!-- Dynamic Service Data Loop (Our Office Section) -->
-<section class="module pt-0 pb-0" id="about">
-    <div class="container">
-        <div class="row">
-            {% for service in service_data %}
-            <div class="col-xs-12 col-md-6 side-image" data-background="{{ service.image.url }}"></div>
-            <div class="col-xs-12 col-md-6 col-md-offset-6 side-image-text">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h2 class="module-title font-alt align-left">{{ service.title }}</h2>
-                        <div class="module-subtitle font-serif align-left">{{ service.short_desc|safe }}</div>
-                        <p>{{ service.description|safe }}</p>
-                        <button style="background-color:black;"><a class="btn btn-border-w btn-round" href="{{ service.link }}">Learn More</a></button>
-                    </div>
-                </div>
-            </div>
-            {% empty %}
-            <p>No service data available.</p>
-            {% endfor %}
-        </div>
-    </div>
-</section>
+<style>
+/* Prevent horizontal scroll */
+html, body {
+    overflow-x: hidden;
+}
 
-<br/><br/>
-<hr class="divider-d">
+.contact-page-header {
+    position: relative;
+    width: 100%;
+    min-height: 380px;
+    background-image: url('{{ service_banners.image.url }}');
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+}
 
-<!-- Work Together Section (Dynamic) -->
-{% if work_together %}
-<section class="module pt-0 pb-0" id="work-together">
-    <div class="container">
-      <div class="row position-center">
-        <h1 style="text-align:center;">{{ work_together.title }}</h1>
-        <p style="text-align:center;">{{ work_together.description|safe }}</p>
-        <div style="text-align:center;">
-            <button style="background-color:black;text-align:center">
-                <a class="btn btn-border-w btn-round" href="{{ work_together.link }}">Contact Us</a>
-            </button>
-        </div>
-    </div>
-    </div>
-</section>
+.banner-container {
+    position: absolute;
+    top: 70%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+.module-title, .module-subtitle {
+    color: white;
+}
+@media(min-width: 768px) {
+    .col-sm-offset-3 {
+        margin-left: 0%;
+    }
+}
+/* Mobile responsiveness */
+@media only screen and (max-width: 500px) {
+    .contact-page-header {
+        min-height: 200px;
+    }
+
+    .module-title {
+        font-size: 1.5em;
+    }
+
+    .module-subtitle {
+        font-size: 1em;
+    }
+}
+
+/* Desktop responsiveness */
+@media only screen and (min-width: 768px) {
+    .banner-container {
+        width: 100%;
+        max-width: 800px;
+        text-align: center;
+    }
+
+    .module-title, .module-subtitle {
+        max-width: 100%;
+    }
+}
+</style>
+
 {% else %}
-<section class="module pt-0 pb-0" id="work-together">
-    <div class="row position-center">
-        <h1 style="text-align:center;">Let's Work Together!</h1>
-        <p style="text-align:center;">No content available for "Work Together" section.</p>
-        <div style="text-align:center;">
-            <button style="background-color:black;text-align:center">
-                <a class="btn btn-border-w btn-round" href="#">Contact Us</a>
-            </button>
-        </div>
-    </div>
-</section>
+<p>No banner available.</p>
 {% endif %}
 
+
 <br/><br/>
+<!-- Sustainability About Section-->
+{% for service in service_data %}
+<section class="module pt-0 pb-0" id="product-{{ forloop.counter }}">
+    <div class="row position-relative m-0">
+        <div class="col-xs-12 col-md-6 side-image" style="background-image: url({{ service.image.url }});"></div>
+        <div class="col-xs-12 col-md-6 col-md-offset-6 side-image-text">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="module-title font-alt align-left" style="color:black;">{{ service.title }}</h2>
+                    <div class="module-subtitle font-serif align-left" style="color:black;">{{ service.short_desc|safe }}</div>
+                    <p>{{ service.description|safe }}</p>
+                    <button style="background-color:black;">
+                        <a class="btn btn-border-w btn-round" href="{{ service.link }}">Learn More</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endfor %}
+<br/><br/>
+
+
+<!-- Our Partner Certifications Section -->
+<section class="module">
+    <div class="container">
+        <div class="row">
+            <div class="">
+                <h2 class="module-title font-alt" style="color:black; text-align:center;">Let's Work Together!</h2>
+                {% if work_together.description %}
+                    <div class="module-subtitle font-serif" style="color:black;">{{ work_together.description|safe }}.</div>
+                {% else %}
+                    <p>No description available.</p>
+                {% endif %}
+            <div style="text-align:center;">
+                 <a class="btn btn-border-w btn-round custom-btn" href="/contact">Contact Us</a>
+             </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}
