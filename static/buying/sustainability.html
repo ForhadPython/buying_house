@@ -3,7 +3,6 @@
 {% block content %}
 
 <style>
-/* Prevent horizontal scroll */
 html, body {
     overflow-x: hidden;
 }
@@ -35,7 +34,6 @@ html, body {
         margin-left: 0%;
     }
 }
-/* Mobile responsiveness */
 @media only screen and (max-width: 500px) {
     .contact-page-header {
         min-height: 200px;
@@ -49,8 +47,6 @@ html, body {
         font-size: 1em;
     }
 }
-
-/* Desktop responsiveness */
 @media only screen and (min-width: 768px) {
     .banner-container {
         width: 100%;
@@ -87,7 +83,7 @@ html, body {
     <div class="row position-relative align-items-center m-0">
         <!-- Image Section -->
         <div class="col-xs-12 col-md-6">
-            <div style="aspect-ratio: 16/9; overflow: hidden;">
+            <div style="aspect-ratio: 16/16; overflow: hidden;">
                 <img src="{{ sustain_data.image.url }}" alt="Sustainability Image" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
         </div>

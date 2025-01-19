@@ -83,22 +83,44 @@ html, body {
 
 <br/><br/><br/>
 <!-- Sustainability About Section-->
+<!--{% for service in service_data %}-->
+<!--<section class="module pt-0 pb-0" id="product-{{ forloop.counter }}">-->
+<!--    <div class="row m-0 align-items-center">-->
+<!--        &lt;!&ndash; Image Section &ndash;&gt;-->
+<!--        <div class="col-12 col-md-6">-->
+<!--            <div style="aspect-ratio: 16/9; overflow: hidden;">-->
+<!--                <img src="{{ service.image.url }}" alt="{{ service.title }}" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Text Section &ndash;&gt;-->
+<!--        <div class="col-12 col-md-6" style="padding: 20px;">-->
+<!--            <h2 class="module-title font-alt" style="color: black; font-weight: bold;">{{ service.title }}</h2>-->
+<!--            <div class="module-subtitle font-serif" style="color: black;">{{ service.short_desc|safe }}</div>-->
+<!--            <p style="color: #555; line-height: 1.6;">{{ service.description|safe }}</p>-->
+<!--            <a class="btn btn-border-w btn-round" href="{{ service.link }}" style="background-color: black; color: white; padding: 10px 20px; text-decoration: none;">Learn More</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--{% endfor %}-->
+
 {% for service in service_data %}
-<section class="module pt-0 pb-0" id="product-{{ forloop.counter }}">
-    <div class="row m-0 align-items-center">
+<section class="module pt-0 pb-0" id="about" style="margin-bottom: 50px;">
+    <div class="row position-relative align-items-center m-0">
         <!-- Image Section -->
-        <div class="col-12 col-md-6">
-            <div style="aspect-ratio: 16/9; overflow: hidden;">
-                <img src="{{ service.image.url }}" alt="{{ service.title }}" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+        <div class="col-xs-12 col-md-6">
+            <div style="aspect-ratio: 16/16; overflow: hidden;">
+                <img src="{{ service.image.url }}" alt="Sustainability Image" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
         </div>
-
         <!-- Text Section -->
-        <div class="col-12 col-md-6" style="padding: 20px;">
-            <h2 class="module-title font-alt" style="color: black; font-weight: bold;">{{ service.title }}</h2>
-            <div class="module-subtitle font-serif" style="color: black;">{{ service.short_desc|safe }}</div>
+        <div class="col-xs-12 col-md-6 side-image-text" style="padding: 20px;">
+            <h2 class="module-title font-alt" style="color: #333; text-align:left;">{{ service.title }}</h2>
+            <div class="module-subtitle font-serif align-left" style="color:black;">{{ service.short_desc|safe }}</div>
             <p style="color: #555; line-height: 1.6;">{{ service.description|safe }}</p>
-            <a class="btn btn-border-w btn-round" href="{{ service.link }}" style="background-color: black; color: white; padding: 10px 20px; text-decoration: none;">Learn More</a>
+            <button style="background-color:black;">
+             <a class="btn btn-border-w btn-round" href="{{ service.link }}">Learn More</a>
+           </button>
         </div>
     </div>
 </section>

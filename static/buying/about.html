@@ -84,20 +84,23 @@ html, body {
 
 <br/><br/>
 
-<!-- Sustainability About Section -->
 {% for about_item in about_items %}
 <section class="module pt-0 pb-0" id="about" style="margin-bottom: 50px;">
     <div class="row position-relative align-items-center m-0">
         <!-- Image Section -->
         <div class="col-xs-12 col-md-6">
-            <img src="{{ about_item.image.url }}" alt="Sustainability Image" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0px;">
+            <div style="aspect-ratio: 16/16; overflow: hidden;">
+                <img src="{{ about_item.image.url }}" alt="Sustainability Image" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
         </div>
         <!-- Text Section -->
         <div class="col-xs-12 col-md-6 side-image-text" style="padding: 20px;">
-            <h2 class="module-title font-alt" style="color: #333; font-weight: bold; text-align:left;">{{ about_item.title }}</h2>
-            <p>{{ about_item.short_desc|safe }}</p>
-            <p>{{ about_item.description|default:""|safe }}</p>
-            <a class="btn btn-border-w btn-round" href="{{ about_item.link }}" style="background-color:black;">Learn More</a>
+            <h2 class="module-title font-alt" style="color: #333; text-align:left;">{{ about_item.title }}</h2>
+            <div class="module-subtitle font-serif align-left" style="color:black;">{{ service.short_desc|safe }}</div>
+            <p style="color: #555; line-height: 1.6;">{{ about_item.description|default:""|safe }}</p>
+            <button style="background-color:black;">
+             <a class="btn btn-border-w btn-round" href="{{ about_item.link }}">Learn More</a>
+           </button>
         </div>
     </div>
 </section>
