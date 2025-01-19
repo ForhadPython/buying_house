@@ -125,22 +125,6 @@ section {
                 <div class="swiper-button-prev"></div>
             </div>
         {% endif %}
-
-        <!-- Common Caption -->
-        <div class="titan-caption">
-            <div class="caption-content">
-                {% if home_banner.short_title %}
-                    <div class="font-alt mb-30 titan-title-size-1">{{ home_banner.short_title }}</div>
-                {% endif %}
-                {% if home_banner.title %}
-                    <div class="font-alt mb-40 titan-title-size-4">{{ home_banner.title }}</div>
-                {% endif %}
-            </div>
-        </div>
-    {% else %}
-        <div class="no-banner">
-            <p>No banner available at the moment.</p>
-        </div>
     {% endif %}
 </section>
 
