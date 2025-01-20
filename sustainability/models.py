@@ -2,6 +2,7 @@ from django.db import models
 from ckeditor.fields import RichTextField  # or RichTextUploadingField
 
 
+
 class SustainabilityBanner(models.Model):
     banner_image = models.ImageField(upload_to='static/media/sustain-banner', null=True, blank=True)
     banner_title = models.CharField(max_length=150, null=True, blank=True)

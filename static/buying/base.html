@@ -48,9 +48,12 @@
     <main>
       <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
-          <div class="navbar-header">
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/">Titan</a>
-          </div>
+<!--          <div class="navbar-header">-->
+<!--            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="/">Titan</a>-->
+<!--          </div>-->
+        <a class="navbar-brand" href="/">
+            <img src="{% static 'buying/images/banner_logo.jpeg' %}" alt="Logo" style="height: 30px; display: inline-block; vertical-align: middle;">
+        </a>
           <div class="collapse navbar-collapse" id="custom-collapse">
             <ul class="nav navbar-nav navbar-right" style="font-size:13px !important; color:white !important;">
               <li class="dropdown"><a href="/"><b>Home</b></a></li>
@@ -76,71 +79,73 @@
       {% endblock %}
 
       <div class="module-small bg-dark">
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-3">
-                <div class="widget">
-                  <h5 class="widget-title font-alt">About Company</h5>
-                  <ul class="widget-posts">
-                    <li class="clearfix">
-                      <div class="widget-posts-image"><a href=""><img src="{% static 'buying/images/rp-1.jpg' %}" alt="Post Thumbnail"/></a></div>
-                      <div class="widget-posts-body">
-                        <div class="widget-posts-title"><a href="">Designer Desk Essentials</a></div>
-                        <div class="widget-posts-meta">23 january</div>
-                      </div>
-                    </li>
-                  </ul><br/>
-                  <p>The languages only differ in their grammar, their pronunciation and their most common words.</p>
-                </div>
+        <div class="container">
+          <!-- Footer Section -->
+          <div class="row">
+            <!-- About Company -->
+            <div class="col-sm-3">
+              <div class="widget">
+                <h5 class="widget-title font-alt">About Company</h5>
+                    <div class="widget-posts-image">
+                      {% if unified_model.about_company_image %}
+                        <a href="#"><img src="{{ unified_model.about_company_image.url }}" alt="About Company Image" /></a>
+                      {% endif %}
+                    </div>
+                <br />
+                <p>{{ unified_model.about_company_description|truncatewords:30|safe }}</p>
               </div>
-              <div class="col-sm-3">
-                <div class="widget">
-                  <h5 class="widget-title font-alt">IMPORTANT LINKS</h5>
-                  <ul class="icon-list" style="color:white">
-                    <li><a href="/" style="color:white">Home</a></li>
-                    <li><a href="/about" style="color:white">About</a></li>
-                    <li><a href="/services" style="color:white">Service</a></li>
-                    <li><a href="/process" style="color:white">Process</a></li>
-                    <li><a href="/sustainability" style="color:white">Sustainability</a></li>
-                    <li><a href="/contact" style="color:white">Contact</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <div class="widget">
-                  <h5 class="widget-title font-alt">Contact Info</h5>
-                  <ul class="icon-list">
-                    <li><span>Address :<br/>
-                      5th Floor, House 417,
-                      Road 7, Baridhara DOHS, Dhaka-1206</span></li>
-                    <li><span>Phone :
-                      +8801798055022 (WhatsApp)
-                      </span></li>
-                    <li><span>Email :
-                      info@gmail.com
-                      </span></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-sm-3">
-                <div class="widget">
-                  <h5 class="widget-title font-alt">Maps</h5>
-                  <div class="row">
-                    <a href="#" style="display: block; width: 100%; justify-content: center; align-items: center;">
-                      <img src="{% static 'buying/images/rp-1.jpg' %}" alt="Post Thumbnail" style="width: 60%; height: 50%; justify-content: center; align-items: center;">
-                    </a>
-                  </div>
-              </div>
+            </div>
 
+            <!-- Important Links -->
+            <div class="col-sm-3">
+              <div class="widget">
+                <h5 class="widget-title font-alt">IMPORTANT LINKS</h5>
+                <ul class="icon-list" style="color:white">
+                  <li><a href="/" style="color:white">Home</a></li>
+                  <li><a href="/about" style="color:white">About</a></li>
+                  <li><a href="/services" style="color:white">Services</a></li>
+                  <li><a href="/process" style="color:white">Process</a></li>
+                  <li><a href="/apparels" style="color:white">Product</a></li>
+                  <li><a href="/sustainability" style="color:white">Sustainability</a></li>
+                  <li><a href="/contact" style="color:white">Contact</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="col-sm-3">
+              <div class="widget">
+                <h5 class="widget-title font-alt">Contact Info</h5>
+                <ul class="icon-list">
+                  <li><span>Address:<br />{{ unified_model.contact_info_address }}</span></li>
+                  <li><span>Phone: {{ unified_model.contact_info_phone }}</span></li>
+                  <li><span>Email: {{ unified_model.contact_info_email }}</span></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Maps -->
+            <div class="col-sm-3">
+              <div class="widget">
+                <h5 class="widget-title font-alt">Maps</h5>
+                <div class="row">
+                  {% if unified_model.footer_maps_image %}
+                    <a href="{{ unified_model.footer_maps_url }}" style="display: block; width: 100%; justify-content: center; align-items: center;">
+                      <img src="{{ unified_model.footer_maps_image.url }}" alt="Maps Image" style="width: 60%; height: 50%; justify-content: center; align-items: center;">
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
         <hr class="divider-d">
         <footer class="footer bg-dark">
           <div class="container">
             <div class="row">
               <div class="col-sm-6">
-                <p class="copyright font-alt">&copy; 2024&nbsp;<a href="/home">TitaN</a>, All Rights Reserved</p>
+                <p class="copyright font-alt">&copy; 2025&nbsp;<a href="/home"></a>, All Rights Reserved</p>
               </div>
               <div class="col-sm-6">
                 <div class="footer-social-links"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-dribbble"></i></a><a href="#"><i class="fa fa-skype"></i></a>
@@ -150,76 +155,6 @@
           </div>
         </footer>
       </div>
-
-
-<!--      <div class="module-small bg-dark">-->
-<!--        <div class="container">-->
-<!--            <div class="row">-->
-<!--                &lt;!&ndash; About Company Section &ndash;&gt;-->
-<!--                <div class="col-sm-3">-->
-<!--                    <div class="widget">-->
-<!--                        <h5 class="widget-title font-alt">About Company</h5>-->
-<!--                        <ul class="widget-posts">-->
-<!--                            <li class="clearfix">-->
-<!--                                <div class="widget-posts-image">-->
-<!--                                    <a href="#">-->
-<!--                                        <img src="{{ about_company.image.url }}" alt="About Company" />-->
-<!--                                    </a>-->
-<!--                                </div>-->
-<!--                                <div class="widget-posts-body">-->
-<!--                                    <div class="widget-posts-title">-->
-<!--                                        <a href="">{{ about_company.description|truncatewords:10 }}</a>-->
-<!--                                    </div>-->
-<!--                                    <div class="widget-posts-meta">{{ about_company.date }}</div>-->
-<!--                                </div>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                        <br/>-->
-<!--                        <p>{{ about_company.description }}</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                &lt;!&ndash; Important Links Section &ndash;&gt;-->
-<!--                <div class="col-sm-3">-->
-<!--                    <div class="widget">-->
-<!--                        <h5 class="widget-title font-alt">IMPORTANT LINKS</h5>-->
-<!--                        <ul class="icon-list" style="color:white">-->
-<!--                            {% for link in important_links %}-->
-<!--                            <li><a href="{{ link.url }}" style="color:white">{{ link.title }}</a></li>-->
-<!--                            {% endfor %}-->
-<!--                        </ul>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                &lt;!&ndash; Contact Info Section &ndash;&gt;-->
-<!--                <div class="col-sm-3">-->
-<!--                    <div class="widget">-->
-<!--                        <h5 class="widget-title font-alt">Contact Info</h5>-->
-<!--                        <ul class="icon-list">-->
-<!--                            <li><span>Address: <br/>{{ contact_info.address }}</span></li>-->
-<!--                            <li><span>Phone: {{ contact_info.phone }}</span></li>-->
-<!--                            <li><span>Email: {{ contact_info.email }}</span></li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                &lt;!&ndash; Maps Section &ndash;&gt;-->
-<!--                <div class="col-sm-3">-->
-<!--                    <div class="widget">-->
-<!--                        <h5 class="widget-title font-alt">Maps</h5>-->
-<!--                        <div class="row">-->
-<!--                            {% for map in footer_maps %}-->
-<!--                            <a href="{{ map.url }}" style="display: block; width: 100%; justify-content: center; align-items: center;">-->
-<!--                                <img src="{{ map.image.url }}" alt="Map Image" style="width: 60%; height: 50%; justify-content: center; align-items: center;">-->
-<!--                            </a>-->
-<!--                            {% endfor %}-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
 
       <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
     </main>

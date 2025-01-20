@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Contact, AdditionalInfo, BusinessHours, ContactBanner
+from metadata.models import UnifiedModel
 
 def contact_view(request):
     message = None
@@ -17,12 +18,14 @@ def contact_view(request):
     banner = ContactBanner.objects.first()  # Fetch the first banner
     additional_info = AdditionalInfo.objects.first()
     business_hours = BusinessHours.objects.first()
+    unified_model = UnifiedModel.objects.last()
 
     context = {
         'banner': banner,
         'additional_info': additional_info,
         'business_hours': business_hours,
         'message': message,
+        'unified_model': unified_model,
     }
     return render(request, 'contact.html', context)
 

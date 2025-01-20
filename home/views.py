@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import *
 from process.models import ProcessData
+from metadata.models import UnifiedModel
 
 
 # def home(request):
@@ -54,6 +55,7 @@ def home(request):
         'blog_post': BlogPost.objects.all(),
         'collaborations': GlobalCollaboration.objects.all(),
         'offices': GlobalCollaborationOffice.objects.all(),
-        'process_data' : ProcessData.objects.all()
+        'process_data': ProcessData.objects.all(),
+        'unified_model': UnifiedModel.objects.last()
     }
     return render(request, 'index.html', context)

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import *
 
 
-def unifiedmodel_list(request):
-    unified_models = UnifiedModel.objects.all()
-    return render(request, 'unifiedmodel_list.html', {'unified_models': unified_models})
+# Function-based view to display a list of UnifiedModel entries
+def unified_model_list(request):
+    unified_model = UnifiedModel.objects.last()  # Fetch the latest UnifiedModel entry
+    return render(request, 'base.html', {'unified_model': unified_model})

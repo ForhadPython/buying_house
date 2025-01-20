@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from .models import *
+from metadata.models import UnifiedModel
 
 
 def apparels_view(request):
     banner = ApparelsBanner.objects.all()
     categories = ApparelsCategory.objects.all()
     genders = ApparelsGender.objects.all()
+    unified_model = UnifiedModel.objects.last()
 
     # Filtering logic
     selected_category = request.GET.get('category')
@@ -26,5 +28,6 @@ def apparels_view(request):
         'genders': genders,
         'selected_category': selected_category,
         'selected_gender': selected_gender,
+        'unified_model': unified_model,
     }
     return render(request, 'apparels.html', context)
