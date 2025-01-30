@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
-
 # Base Directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -45,6 +44,8 @@ INSTALLED_APPS = [
     'accessories',
     'process',
     'about',
+    'handi_craft',
+    'home_tex',
     'metadata',
 ]
 
@@ -91,15 +92,13 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-
 # Database
 # DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite5',
+#     }
 # }
-
 
 DATABASES = {
     'default': {
@@ -177,7 +176,7 @@ JAZZMIN_UI_TWEAKS = {
 JAZZMIN_SETTINGS = {
     "site_title": "Admin",
     "site_header": "Admin",
-    "site_logo": "/images/logo.png",
+    "site_logo": "buying/images/admin-logo.png",
     "welcome_sign": "Welcome to Admin",
     "copyright": "Themefisher",
     "search_model": "account.User",

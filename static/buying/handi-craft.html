@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% if banners %}
+<section class="module contact-page-header bg-dark">
+    <div class="container">
+        <div class="row" style="margin-top: 5%;">
+            <div class="col-sm-6 col-sm-offset-3 text-center banner-container">
+                <h2 class="module-title font-alt" style="text-align: center !important;">{{ banners.0.title }}</h2>
+                <div class="module-subtitle font-serif">{{ banners.0.description|safe }}</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Prevent horizontal scroll */
+html, body {
+    overflow-x: hidden;
+}
+
+.contact-page-header {
+    position: relative;
+    width: 100%;
+    min-height: 380px;
+    background-image: url('{{ banners.0.image.url }}');
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+}
+
+.banner-container {
+    position: absolute;
+    top: 70%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+.module-title, .module-subtitle {
+    color: white;
+}
+@media(min-width: 768px) {
+    .col-sm-offset-3 {
+        margin-left: 0%;
+    }
+}
+/* Mobile responsiveness */
+@media only screen and (max-width: 500px) {
+    .contact-page-header {
+        min-height: 200px;
+    }
+
+    .module-title {
+        font-size: 1.5em;
+    }
+
+    .module-subtitle {
+        font-size: 1em;
+    }
+}
+
+/* Desktop responsiveness */
+@media only screen and (min-width: 768px) {
+    .banner-container {
+        width: 100%;
+        max-width: 800px;
+        text-align: center;
+    }
+
+    .module-title, .module-subtitle {
+        max-width: 100%;
+    }
+}
+</style>
+
+{% else %}
+<p>No banner available.</p>
+{% endif %}
+<br><br>
+
+<!-- Handicrafts Section -->
+{% if handicrafts %}
+    {% for item in handicrafts %}
+        <section class="module pt-0 pb-0" id="about" style="margin-bottom: 50px;">
+            <div class="row position-relative align-items-center m-0">
+
+                <!-- Image Section -->
+                <div class="col-xs-12 col-md-6">
+                    <div style="aspect-ratio: 16/16; overflow: hidden;">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid"
+                                 style="width: 100%; height: 100%; object-fit: cover;">
+                        {% else %}
+                            <img src="{% static 'images/placeholder.jpg' %}" alt="Placeholder" class="img-fluid"
+                                 style="width: 100%; height: 100%; object-fit: cover;">
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Text Section -->
+                <div class="col-xs-12 col-md-6 side-image-text" style="padding: 20px;">
+                    <h2 class="module-title font-alt" style="color: #333; text-align:left;">{{ item.title }}</h2>
+                    <div class="module-subtitle font-serif align-left" style="color:black;">{{ item.short_desc|safe }}</div>
+                    <p>{{ item.description|safe }}</p>
+
+                    {% if item.link %}
+                    <button style="background-color:black;">
+                     <a class="btn btn-border-w btn-round" href="{{ item.link }}">Learn More</a>
+                   </button>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+{% else %}
+    <p class="text-center">No handicrafts available.</p>
+{% endif %}
+
+{% endblock %}

@@ -157,19 +157,3 @@ class GlobalCollaborationOffice(models.Model):
 
     def __str__(self):
         return self.link
-
-
-class MetaData(models.Model):
-    header_logo = models.ImageField(upload_to='header-logo/')
-    about_company = models.ImageField(upload_to='header-logo/')
-    about_company_desc = models.TextField()
-    contact_info = models.CharField(max_length=255)
-    phone_number = models.CharField(max_length=255)
-    email = models.EmailField()
-    maps_img = models.ImageField(upload_to='header-logo/')
-    maps_desc = models.CharField(max_length=255)
-    created_at = models.DateTimeField(default=now, editable=False)  # Automatically set when the record is created
-    updated_at = models.DateTimeField(auto_now=True)  # Automatically update every time the record is saved
-
-    def __str__(self):
-        return f"MetaData - {self.contact_info}"
