@@ -118,7 +118,7 @@
               <div class="widget">
                 <h5 class="widget-title font-alt">Contact Info</h5>
                 <ul class="icon-list">
-                  <li><span>Address:<br />{{ unified_model.contact_info_address }}</span></li>
+                  <li><span>Address:<br />{{ unified_model.contact_info_address|safe }}</span></li>
                   <li><span>Phone: {{ unified_model.contact_info_phone }}</span></li>
                   <li><span>Email: {{ unified_model.contact_info_email }}</span></li>
                 </ul>

@@ -8,7 +8,7 @@ class UnifiedModel(models.Model):
     about_company_description = RichTextField(blank=True, null=True)
 
     # Fields from ContactInfo
-    contact_info_address = models.TextField(blank=True, null=True)
+    contact_info_address = RichTextField(blank=True, null=True)
     contact_info_phone = models.CharField(max_length=50, blank=True, null=True)
     contact_info_email = models.EmailField(blank=True, null=True)
 
